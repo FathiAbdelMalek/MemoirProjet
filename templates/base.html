@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} - Memoir</title>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+{% include 'includes/nav.html' %}
+{% include 'includes/aside.html' %}
+{% block content %}{% endblock %}
+{% include 'includes/footer.html' %}
+{% include 'includes/firebase connection.html' %}
+</body>
+</html>

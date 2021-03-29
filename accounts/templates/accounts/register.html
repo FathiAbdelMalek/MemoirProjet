@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+    <h1>Register</h1>
+    {% include 'includes/form.html' %}
+    <div><a href="{% url 'login' %}">Already have an account ?</a></div>
+    <div><a href="{% url 'home' %}">Return home</a></div>
+{% endblock %}
