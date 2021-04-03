@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
-    <h1>Home Page</h1>
+    <h1>Conferences</h1>
+    {% for conference in conference_list %}
+        <div>
+            <h2>{{ conference.title }}</h2>
+            <p>{{ conference.description }}</p>
+            <span>{{ conference.creator }}</span>
+            <span>{{ conference.created_date|naturaltime }}</span>
+            {% for demand in demand_list %}
+                {% if demand.conference == conference %}
+                    <div>
+                        <p>{{ demand.note }}</p>
+                        <span>{{ demand.user }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <hr>
+        </div>
+    {% endfor %}
 {% endblock %}

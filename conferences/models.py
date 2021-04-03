@@ -11,7 +11,7 @@ User = get_user_model()
 class Conference(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(verbose_name='description')
-    image = models.CharField(max_length=100)
+    # image = models.CharField(max_length=100)
     created_date = models.DateTimeField(auto_now_add=True)
     last_date = models.DateTimeField()
     place = models.CharField(max_length=50)

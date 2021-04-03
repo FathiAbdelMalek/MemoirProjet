@@ -8,7 +8,7 @@ from notifications.models import Notification
 def show_notifications(request):
     notifications = Notification.objects.filter(receiver=request.user).order_by('-date')
     context = {
-        'notifications': notifications
+        'notification_list': notifications
     }
     return render(request, 'notifications/nots.html', context)
 
