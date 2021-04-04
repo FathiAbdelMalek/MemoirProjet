@@ -15,10 +15,22 @@
                 {% if demand.conference == conference %}
                     <div>
                         <p>{{ demand.note }}</p>
-                        <span>{{ demand.user }}</span>
+                        <p>{{ demand.user }}</p>
                     </div>
+                    {% if request.user == demand.user %}
+                        <a href="{% url 'demand_update' demand.pk %}">Update</a>
+                        <a href="{% url 'demand_delete' demand.pk %}">Delete</a>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
+            {% if request.user.is_authenticated %}
+                {% if request.user != conference.creator %}
+                    <a href="{% url 'demand_create' conference.pk %}">Demand</a>
+                {% else %}
+                    <a href="{% url 'conference_update' conference.pk %}">Update</a>
+                    <a href="{% url 'conference_delete' conference.pk %}">Delete</a>
+                {% endif %}
+            {% endif %}
             <hr>
         </div>
     {% endfor %}

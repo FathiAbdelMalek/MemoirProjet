@@ -24,7 +24,7 @@ class Conference(models.Model):
 
 class Demand(models.Model):
     note = models.CharField(max_length=500)
-    work = models.FilePathField()
+    # work = models.FilePathField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
 
