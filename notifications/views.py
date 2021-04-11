@@ -10,12 +10,13 @@ def show_notifications(request):
     context = {
         'notification_list': notifications
     }
-    return render(request, 'notifications/nots.html', context)
+    return render(request, 'notifications/notes.html', context)
 
 
+@login_required()
 def delete_notifications(request, pk):
-    Notification.objects.filter(id=pk, receiver=request.user).delete()
-    return redirect('notifications')
+    Notification.objects.filter(id=pk).delete()
+    # return redirect('notifications')
 
 
 def count_notifications(request):

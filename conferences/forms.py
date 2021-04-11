@@ -6,14 +6,14 @@ class ConferenceCreationForm(forms.ModelForm):
 
     class Meta:
         model = Conference
-        fields = ['title', 'description', 'last_date', 'place']
+        fields = ['title', 'description', 'date', 'last_date_for_submit', 'place']
 
 
 class ConferenceUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Conference
-        fields = ['title', 'description', 'last_date', 'place', 'enabled']
+        fields = ['title', 'description', 'date', 'last_date_for_submit', 'place']
 
 
 class DemandCreationForm(forms.ModelForm):

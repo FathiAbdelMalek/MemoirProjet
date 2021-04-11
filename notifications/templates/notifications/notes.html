@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+    <h1>Notifications</h1>
+    <div>
+        {% for notification in notifications %}
+            {{ notification.actor }} {{ notification.verb }}
+            <span class="timesince">{{ notification.created|timesince }} ago</span>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

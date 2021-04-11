@@ -5,8 +5,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic
+from django.core.mail import send_mail
 
-from notifications.models import Notification
+# from notifications.models import Notification
 from .models import Conference, Demand
 from .forms import ConferenceCreationForm, ConferenceUpdateForm, DemandCreationForm, DemandUpdateForm
 
@@ -43,6 +44,12 @@ class ConferenceUpdateView(generic.UpdateView):
         return redirect('home')
 
 
+@login_required()
+def delete_conference(request, pk):
+    Conference.objects.filter(id=pk).delete()
+    return redirect('home')
+
+
 @method_decorator(login_required, name='dispatch')
 class ConferenceDeleteView(generic.DeleteView):
     model = Conference
@@ -60,6 +67,16 @@ def demand_create(request, conf_pk):
             demand.conference = Conference.objects.get(id=conf_pk)
             demand.save()
             messages.success(request, 'You demand to subscribe successfully')
+            message = ""
+            message += str(demand.user)
+            message += " has demand to submit in your conference "
+            message += str(demand.conference.title)
+            send_mail(
+                'a demand for submission',
+                message,
+                'abdelmalek.fathi.2001@gmail.com',
+                [demand.conference.creator.email]
+            )
             return redirect('home')
     context = {
         'form': form
@@ -92,20 +109,51 @@ class DemandUpdateView(generic.UpdateView):
         return redirect('home')
 
 
+@login_required()
+def delete_demand(request, pk):
+    Demand.objects.filter(id=pk).delete()
+    return redirect('home')
+
+
 @method_decorator(login_required, name='dispatch')
 class DemandDeleteView(generic.DeleteView):
     model = Demand
-    success_url = reverse_lazy()
+    success_url = reverse_lazy('home')
 
 
 @login_required()
 def accept_demand(request, pk):
-    # demand = Demand.objects.filter(id=pk)
-    # demand.delete()
+    demand = Demand.objects.get(id=pk)
+    demand.status = 1
+    demand.save()
+    message = ""
+    message += str(demand.user)
+    message += " has accepted your demand to submit in "
+    message += str(demand.conference.title)
+    send_mail(
+        'a demand for submission',
+        message,
+        'abdelmalek.fathi.2001@gmail.com',
+        [demand.conference.creator.email]
+    )
     messages.success(request, 'The demand has ben accepted successfully')
     return redirect('home')
 
 
 @login_required()
 def refuse_demand(request, pk):
+    demand = Demand.objects.get(id=pk)
+    demand.status = 2
+    demand.save()
+    message = ""
+    message += str(demand.user)
+    message += " has refused your demand to submit in "
+    message += str(demand.conference.title)
+    send_mail(
+        'a demand for submission',
+        message,
+        'abdelmalek.fathi.2001@gmail.com',
+        [demand.conference.creator.email]
+    )
+    messages.success(request, 'The demand has ben refused successfully')
     return redirect('home')
