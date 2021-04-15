@@ -31,7 +31,9 @@
             {% endfor %}
             {% if request.user.is_authenticated %}
                 {% if request.user != conference.creator %}
-                    <a href="{% url 'demand_create' conference.pk %}">Demand</a>
+                    {% if conference.can_demand %}
+                        <a href="{% url 'demand_create' conference.pk %}">Demand</a>
+                    {% endif %}
                 {% else %}
                     <a href="{% url 'conference_update' conference.pk %}">Update</a>
                     <a href="{% url 'conference_delete' conference.pk %}">Delete</a>

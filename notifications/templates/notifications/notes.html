@@ -7,8 +7,26 @@
     <h1>Notifications</h1>
     <div>
         {% for notification in notifications %}
-            {{ notification.actor }} {{ notification.verb }}
-            <span class="timesince">{{ notification.created|timesince }} ago</span>
+            {% if notification.type == 0 %}
+                <div>
+                    <a href="{% url 'notification_delete' notification.pk %}">X</a>
+                    <p>
+                        <a href="#">
+                            {{ notification.sender }}
+                        </a>
+                        has demand a submission in your conference
+                        <a href="#">
+                            {{ notification.conference.title }}
+                        </a>
+                    </p>
+                    <a href="{% url 'demand_accepted' notification.demand.pk %}">Accept</a>
+                    <a href="{% url 'demand_refused' notification.demand.pk %}">Refuse</a>
+                </div>
+            {% elif notification.type == 1 %}
+                <p>{{ notification.sender }} has accept your submission in {{ notification.conference.title }}</p>
+            {% elif notification.type == 2 %}
+                <p>{{ notification.sender }} has refused your submission in {{ notification.conference.title }}</p>
+            {% endif %}
             <hr>
         {% endfor %}
     </div>

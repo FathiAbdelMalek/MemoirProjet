@@ -8,7 +8,7 @@ from notifications.models import Notification
 def show_notifications(request):
     notifications = Notification.objects.filter(receiver=request.user).order_by('-date')
     context = {
-        'notification_list': notifications
+        'notifications': notifications
     }
     return render(request, 'notifications/notes.html', context)
 
@@ -16,7 +16,7 @@ def show_notifications(request):
 @login_required()
 def delete_notifications(request, pk):
     Notification.objects.filter(id=pk).delete()
-    # return redirect('notifications')
+    return redirect('notifications')
 
 
 def count_notifications(request):
