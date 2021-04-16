@@ -20,11 +20,11 @@ class DemandCreationForm(forms.ModelForm):
 
     class Meta:
         model = Demand
-        fields = ['note']
+        fields = ['first_name', 'last_name', 'email', 'abstract', 'article', 'authors']
 
 
 class DemandUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Demand
-        fields = ['note']
+        fields = ['first_name', 'last_name', 'email', 'abstract', 'article', 'authors']

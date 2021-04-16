@@ -23,7 +23,7 @@
                         <p>{{ demand.user }}</p>
                         <p>{{ demand.demand_date|naturaltime }}</p>
                     </div>
-                    {% if request.user == demand.user and demand.status == 0 %}
+                    {% if request.user == demand.user and demand.status == 0 and demand.conference.can_demand %}
                         <a href="{% url 'demand_update' demand.pk %}">Update</a>
                         <a href="{% url 'demand_delete' demand.pk %}">Delete</a>
                     {% endif %}

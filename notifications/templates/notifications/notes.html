@@ -19,8 +19,10 @@
                             {{ notification.conference.title }}
                         </a>
                     </p>
-                    <a href="{% url 'demand_accepted' notification.demand.pk %}">Accept</a>
-                    <a href="{% url 'demand_refused' notification.demand.pk %}">Refuse</a>
+                    {% if notification.demand.can_confirm %}
+                        <a href="{% url 'demand_accepted' notification.demand.pk %}">Accept</a>
+                        <a href="{% url 'demand_refused' notification.demand.pk %}">Refuse</a>
+                    {% endif %}
                 </div>
             {% elif notification.type == 1 %}
                 <p>{{ notification.sender }} has accept your submission in {{ notification.conference.title }}</p>

@@ -3,5 +3,5 @@
 {% block title %} Profile {% endblock %}
 
 {% block content %}
-    <h1>Profile Page</h1>
+    <a href="{% url 'profile_update' user.id %}">Update Profile</a>
 {% endblock %}
