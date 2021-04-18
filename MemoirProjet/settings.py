@@ -66,8 +66,7 @@ TEMPLATES = [
                  BASE_DIR / 'accounts/templates',
                  BASE_DIR / 'profiles/templates',
                  BASE_DIR / 'conferences/templates',
-                 BASE_DIR / 'notifications/templates']
-        ,
+                 BASE_DIR / 'notifications/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

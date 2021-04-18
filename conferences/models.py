@@ -8,7 +8,7 @@ User = get_user_model()
 class Author(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    email = models.EmailField(verbose_name="email", max_length=254, unique=False)
+    email = models.EmailField(verbose_name="email", max_length=254, unique=True)
 
     def __str__(self):
         return self.last_name + " " + self.first_name
@@ -34,6 +34,11 @@ class Conference(models.Model):
             return False
         return True
 
+    def can_confirm(self):
+        if timezone.now().date() <= self.last_date_for_submit or timezone.now().date() > self.last_date_for_confirm:
+            return False
+        return True
+
 
 class Demand(models.Model):
     STATUS = (
@@ -56,9 +61,3 @@ class Demand(models.Model):
 
     def __str__(self):
         return self.user + " -> " + self.conference
-
-    def can_confirm(self):
-        if timezone.now().date() <= self.conference.last_date_for_submit or \
-                timezone.now().date() > self.conference.last_date_for_confirm:
-            return False
-        return True

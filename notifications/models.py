@@ -10,9 +10,9 @@ User = get_user_model()
 
 class Notification(models.Model):
     TYPE = (
-        (1, 'Demand Subscribe'),
-        (2, 'Accept Demand'),
-        (3, 'Refuse Demand'),
+        (0, 'Demand Subscribe'),
+        (1, 'Accept Demand'),
+        (2, 'Refuse Demand'),
     )
 
     type = models.IntegerField(choices=TYPE)

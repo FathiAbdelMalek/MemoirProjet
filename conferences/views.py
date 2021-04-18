@@ -1,13 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.core.mail import send_mail
-
-# from notifications.models import Notification
 from .models import Conference, Demand
 from .forms import ConferenceCreationForm, ConferenceUpdateForm, DemandCreationForm, DemandUpdateForm
 
@@ -56,34 +53,6 @@ class ConferenceDeleteView(generic.DeleteView):
     success_url = reverse_lazy('home')
 
 
-@login_required()
-def demand_create(request, conf_pk):
-    form = DemandCreationForm()
-    if request.method == 'POST':
-        form = DemandCreationForm(request.POST)
-        if form.is_valid():
-            demand = form.save(commit=False)
-            demand.user = request.user
-            demand.conference = Conference.objects.get(id=conf_pk)
-            demand.save()
-            messages.success(request, 'You demand to subscribe successfully')
-            message = ""
-            message += str(demand.user)
-            message += " has demand to submit in your conference "
-            message += str(demand.conference.title)
-            send_mail(
-                'a demand for submission',
-                message,
-                'abdelmalek.fathi.2001@gmail.com',
-                [demand.conference.creator.email]
-            )
-            return redirect('home')
-    context = {
-        'form': form
-    }
-    return render(request, 'demands/create.html', context)
-
-
 @method_decorator(login_required, name='dispatch')
 class DemandCreationView(generic.CreateView):
     model = Demand
@@ -93,8 +62,19 @@ class DemandCreationView(generic.CreateView):
     def form_valid(self, form):
         demand = form.save(commit=False)
         demand.user = self.request.user
-        demand.conference = Conference.objects.get(id=self.pk_url_kwarg)
+        demand.conference = Conference.objects.get(id=self.kwargs['conf_pk'])
         demand.save()
+        messages.success(self.request, 'You demand to subscribe successfully')
+        message = ""
+        message += str(demand.user)
+        message += " has demand to submit in your conference "
+        message += str(demand.conference.title)
+        send_mail(
+            'a demand for submission',
+            message,
+            'abdelmalek.fathi.2001@gmail.com',
+            [demand.conference.creator.email]
+        )
         return redirect('home')
 
 

@@ -19,7 +19,7 @@
                             {{ notification.conference.title }}
                         </a>
                     </p>
-                    {% if notification.demand.can_confirm %}
+                    {% if notification.can_confirm %}
                         <a href="{% url 'demand_accepted' notification.demand.pk %}">Accept</a>
                         <a href="{% url 'demand_refused' notification.demand.pk %}">Refuse</a>
                     {% endif %}
