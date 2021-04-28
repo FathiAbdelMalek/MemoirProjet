@@ -4,4 +4,7 @@
 
 {% block content %}
     <a href="{% url 'profile_update' user.id %}">Update Profile</a>
+    <p>{{ user.first_name }}</p>
+    <p>{{ user.last_name }}</p>
+    <p>{{ profile.sexe }}</p>
 {% endblock %}

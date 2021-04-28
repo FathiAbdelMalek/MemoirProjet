@@ -1,18 +1,15 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django_countries.fields import CountryField
-from pytz import country_names
-import pytz
 
 
 User = get_user_model()
-# Create your models here.
 
 
 class Profile(models.Model):
     SEXE = (
-        ("M", "MALE"),
-        ("F", "FEMALE"),
+        (1, "MALE"),
+        (2, "FEMALE"),
     )
 
     DEGREE = (
@@ -26,7 +23,7 @@ class Profile(models.Model):
 
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     birth_date = models.DateField(verbose_name="birth date", null=True, blank=True)
-    sexe = models.CharField(max_length=7, choices=SEXE, default="M")
+    sexe = models.IntegerField(choices=SEXE, null=True, blank=True)
     country = CountryField(null=True, blank=True)
     work_place = models.CharField(max_length=30, null=True, blank=True)
     degree = models.IntegerField(choices=DEGREE, null=True, blank=True)

@@ -14,7 +14,7 @@
         <div>
             <h2>{{ conference.title }}</h2>
             <p>{{ conference.description }}</p>
-            <span>{{ conference.creator }}</span>
+            <span>{{ conference.organizer }}</span>
             <span>{{ conference.created_date|naturaltime }}</span>
             {% for demand in demand_list %}
                 {% if demand.conference == conference %}
@@ -23,15 +23,15 @@
                         <p>{{ demand.user }}</p>
                         <p>{{ demand.demand_date|naturaltime }}</p>
                     </div>
-                    {% if request.user == demand.user and demand.status == 0 and demand.conference.can_demand %}
+                    {% if request.user == demand.user and demand.status == 0 and demand.conference.can_submit %}
                         <a href="{% url 'demand_update' demand.pk %}">Update</a>
                         <a href="{% url 'demand_delete' demand.pk %}">Delete</a>
                     {% endif %}
                 {% endif %}
             {% endfor %}
             {% if request.user.is_authenticated %}
-                {% if request.user != conference.creator %}
-                    {% if conference.can_demand %}
+                {% if request.user != conference.organizer %}
+                    {% if conference.can_submit %}
                         <a href="{% url 'demand_create' conference.pk %}">Demand</a>
                     {% endif %}
                 {% else %}

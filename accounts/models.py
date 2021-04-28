@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django_countries.fields import CountryField
 
 
 class UserManager(BaseUserManager):
@@ -43,7 +42,6 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.is_staff = True
         user.save(using=self._db)
-        from profiles.models import Profile
         return user
 
 

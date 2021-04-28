@@ -1,23 +1,25 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views import generic
 from .models import Profile
 from .forms import ProfileUpdateForm
-from conferences.models import Conference, Demand
+from conferences.models import Conference, Submission
 
 
-@method_decorator(login_required, name='dispatch')
+User = get_user_model()
+
+
 class ProfileView(generic.DetailView):
     model = Profile
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
-        context['conferences'] = Conference.objects.filter(creator=self.request.user)
-        context['demands'] = Demand.objects.all()
-        context['self_demands'] = Demand.objects.filter(user=self.request.user)
+        context['conferences'] = Conference.objects.filter(organizer=self.request.user)
+        context['submissions'] = Submission.objects.all()
+        context['self_submissions'] = Submission.objects.filter(user=self.request.user)
         return context
 
 
@@ -29,5 +31,9 @@ class ProfileUpdateView(generic.UpdateView):
     context_object_name = 'profile'
 
     def form_valid(self, form):
-        profile = form.save()
-        return redirect('profile', profile.user.pk)
+        user = User.objects.get(pk=form.user.pk)
+        user.first_name = form.first_name
+        user.last_name = form.last_name
+        user.save()
+        form.save()
+        return redirect('profile', form.user.pk)

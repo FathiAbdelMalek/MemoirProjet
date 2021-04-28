@@ -21,26 +21,32 @@ class Conference(models.Model):
     image = models.ImageField(null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     date = models.DateTimeField()
-    last_date_for_submit = models.DateField()
-    last_date_for_confirm = models.DateField(null=True, blank=True)
-    last_date_for_pay = models.DateField(null=True, blank=True)
-    creator = models.ForeignKey(User, on_delete=models.RESTRICT)
+    submission_deadline = models.DateField()
+    confirmation_deadline = models.DateField(null=True, blank=True)
+    payment_deadline = models.DateField(null=True, blank=True)
+    price = models.CharField(max_length=20, null=True, blank=True)
+    organizer = models.ForeignKey(User, on_delete=models.RESTRICT)
 
     def __str__(self):
         return self.title
 
-    def can_demand(self):
-        if timezone.now().date() > self.last_date_for_submit:
+    def can_submit(self):
+        if timezone.now().date() > self.submission_deadline:
             return False
         return True
 
     def can_confirm(self):
-        if timezone.now().date() <= self.last_date_for_submit or timezone.now().date() > self.last_date_for_confirm:
+        if timezone.now().date() <= self.submission_deadline or timezone.now().date() > self.confirmation_deadline:
+            return False
+        return True
+
+    def can_pay(self):
+        if timezone.now().date() <= self.payment_deadline or timezone.now().date() > self.confirmation_deadline:
             return False
         return True
 
 
-class Demand(models.Model):
+class Submission(models.Model):
     STATUS = (
         (0, 'waiting'),
         (1, 'accepted'),
@@ -51,13 +57,14 @@ class Demand(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     email = models.EmailField(verbose_name="email", max_length=254, unique=False)
+    article_name = models.CharField(max_length=100, null=True, blank=True)
     abstract = models.TextField(verbose_name='abstract')
     article = models.FileField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     authors = models.ManyToManyField(Author, related_name='article_authors')
-    conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUS, default=0)
     demand_date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user + " -> " + self.conference
+        return self.user + " submission in " + self.conference

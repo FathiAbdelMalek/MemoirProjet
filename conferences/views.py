@@ -5,8 +5,8 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.core.mail import send_mail
-from .models import Conference, Demand
-from .forms import ConferenceCreationForm, ConferenceUpdateForm, DemandCreationForm, DemandUpdateForm
+from .models import Conference, Submission
+from .forms import ConferenceCreationForm, ConferenceUpdateForm, SubmissionCreationForm, SubmissionUpdateForm
 
 
 class IndexView(generic.ListView):
@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['demand_list'] = Demand.objects.all()
+        context['demand_list'] = Submission.objects.all()
         return context
 
 
@@ -25,7 +25,7 @@ class ConferenceCreationView(generic.CreateView):
 
     def form_valid(self, form):
         conference = form.save(commit=False)
-        conference.creator = self.request.user
+        conference.organizer = self.request.user
         conference.save()
         return redirect('home')
 
@@ -55,8 +55,8 @@ class ConferenceDeleteView(generic.DeleteView):
 
 @method_decorator(login_required, name='dispatch')
 class DemandCreationView(generic.CreateView):
-    model = Demand
-    form_class = DemandCreationForm
+    model = Submission
+    form_class = SubmissionCreationForm
     pk_url_kwarg = 'conf_pk'
 
     def form_valid(self, form):
@@ -73,15 +73,15 @@ class DemandCreationView(generic.CreateView):
             'a demand for submission',
             message,
             'abdelmalek.fathi.2001@gmail.com',
-            [demand.conference.creator.email]
+            [demand.conference.organizer.email]
         )
         return redirect('home')
 
 
 @method_decorator(login_required, name='dispatch')
 class DemandUpdateView(generic.UpdateView):
-    model = Demand
-    form_class = DemandUpdateForm
+    model = Submission
+    form_class = SubmissionUpdateForm
     pk_url_kwarg = 'pk'
 
     def form_valid(self, form):
@@ -91,19 +91,19 @@ class DemandUpdateView(generic.UpdateView):
 
 @login_required()
 def delete_demand(request, pk):
-    Demand.objects.filter(id=pk).delete()
+    Submission.objects.filter(id=pk).delete()
     return redirect('home')
 
 
 @method_decorator(login_required, name='dispatch')
 class DemandDeleteView(generic.DeleteView):
-    model = Demand
+    model = Submission
     success_url = reverse_lazy('home')
 
 
 @login_required()
 def accept_demand(request, pk):
-    demand = Demand.objects.get(id=pk)
+    demand = Submission.objects.get(id=pk)
     demand.status = 1
     demand.save()
     message = ""
@@ -114,7 +114,7 @@ def accept_demand(request, pk):
         'a demand for submission',
         message,
         'abdelmalek.fathi.2001@gmail.com',
-        [demand.conference.creator.email]
+        [demand.conference.organizer.email]
     )
     messages.success(request, 'The demand has ben accepted successfully')
     return redirect('home')
@@ -122,7 +122,7 @@ def accept_demand(request, pk):
 
 @login_required()
 def refuse_demand(request, pk):
-    demand = Demand.objects.get(id=pk)
+    demand = Submission.objects.get(id=pk)
     demand.status = 2
     demand.save()
     message = ""
@@ -133,7 +133,7 @@ def refuse_demand(request, pk):
         'a demand for submission',
         message,
         'abdelmalek.fathi.2001@gmail.com',
-        [demand.conference.creator.email]
+        [demand.conference.organizer.email]
     )
     messages.success(request, 'The demand has ben refused successfully')
     return redirect('home')
