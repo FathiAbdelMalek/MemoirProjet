@@ -21,7 +21,7 @@ class Profile(models.Model):
         (5, 'Professor'),
     )
 
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     birth_date = models.DateField(verbose_name="birth date", null=True, blank=True)
     sexe = models.IntegerField(choices=SEXE, null=True, blank=True)
     country = CountryField(null=True, blank=True)

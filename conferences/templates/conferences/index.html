@@ -1,45 +1,18 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock %}
 
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
-    <h1>Conferences</h1>
-    {% if messages %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    {% endif %}
-    {% for conference in conference_list %}
-        <div>
-            <h2>{{ conference.title }}</h2>
-            <p>{{ conference.description }}</p>
-            <span>{{ conference.organizer }}</span>
-            <span>{{ conference.created_date|naturaltime }}</span>
-            {% for demand in demand_list %}
-                {% if demand.conference == conference %}
-                    <div>
-                        <p>{{ demand.note }}</p>
-                        <p>{{ demand.user }}</p>
-                        <p>{{ demand.demand_date|naturaltime }}</p>
-                    </div>
-                    {% if request.user == demand.user and demand.status == 0 and demand.conference.can_submit %}
-                        <a href="{% url 'demand_update' demand.pk %}">Update</a>
-                        <a href="{% url 'demand_delete' demand.pk %}">Delete</a>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-            {% if request.user.is_authenticated %}
-                {% if request.user != conference.organizer %}
-                    {% if conference.can_submit %}
-                        <a href="{% url 'demand_create' conference.pk %}">Demand</a>
-                    {% endif %}
-                {% else %}
-                    <a href="{% url 'conference_update' conference.pk %}">Update</a>
-                    <a href="{% url 'conference_delete' conference.pk %}">Delete</a>
-                {% endif %}
-            {% endif %}
-            <hr>
-        </div>
-    {% endfor %}
+    <div class="boxi">
+        <h2>conference title</h2>
+        <h4> univ tebessa</h4>
+
+        
+    </div>
 {% endblock %}
