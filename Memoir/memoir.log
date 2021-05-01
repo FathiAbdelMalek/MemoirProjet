@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.4.27)  28 APR 2021 15:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.4.27)  1 MAY 2021 15:04
 entering extended mode
 **./memoir.tex
 (memoir.tex
@@ -73,7 +73,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Here is how much of TeX's memory you used:
  412 strings out of 479334
  7168 string characters out of 2866960
- 290418 words of memory out of 3000000
+ 291418 words of memory out of 3000000
  17935 multiletter control sequences out of 15000+200000
  407378 words of font info for 40 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -83,7 +83,7 @@ pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Prog
 ram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiK
 TeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmr17.pfb>
-Output written on memoir.pdf (8 pages, 69372 bytes).
+Output written on memoir.pdf (8 pages, 71215 bytes).
 PDF statistics:
  49 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
