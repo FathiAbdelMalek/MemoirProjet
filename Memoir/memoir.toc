@@ -1,6 +1,0 @@
-\contentsline {section}{\numberline {1}Introduction}{3}{}%
-\contentsline {section}{\numberline {2}Presentation of the project framework}{4}{}%
-\contentsline {section}{\numberline {3}Analysis and design (UML)}{5}{}%
-\contentsline {section}{\numberline {4}The achievement}{6}{}%
-\contentsline {section}{\numberline {5}Conclusion}{7}{}%
-\contentsline {section}{\numberline {6}Bibliography}{8}{}%
