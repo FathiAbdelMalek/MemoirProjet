@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['submissions_list'] = Submission.objects.all()
+        context['demand_list'] = Submission.objects.all()
         return context
 
 
@@ -54,32 +54,32 @@ class ConferenceDeleteView(generic.DeleteView):
 
 
 @method_decorator(login_required, name='dispatch')
-class SubmissionCreationView(generic.CreateView):
+class DemandCreationView(generic.CreateView):
     model = Submission
     form_class = SubmissionCreationForm
     pk_url_kwarg = 'conf_pk'
 
     def form_valid(self, form):
-        submission = form.save(commit=False)
-        submission.user = self.request.user
-        submission.conference = Conference.objects.get(id=self.kwargs['conf_pk'])
-        submission.save()
-        messages.success(self.request, 'You submission to subscribe successfully')
+        demand = form.save(commit=False)
+        demand.user = self.request.user
+        demand.conference = Conference.objects.get(id=self.kwargs['conf_pk'])
+        demand.save()
+        messages.success(self.request, 'You demand to subscribe successfully')
         message = ""
-        message += str(submission.user)
-        message += " has submission to submit in your conference "
-        message += str(submission.conference.title)
+        message += str(demand.user)
+        message += " has demand to submit in your conference "
+        message += str(demand.conference.title)
         send_mail(
-            'a submission for submission',
+            'a demand for submission',
             message,
             'abdelmalek.fathi.2001@gmail.com',
-            [submission.conference.organizer.email]
+            [demand.conference.organizer.email]
         )
         return redirect('home')
 
 
 @method_decorator(login_required, name='dispatch')
-class SubmissionUpdateView(generic.UpdateView):
+class DemandUpdateView(generic.UpdateView):
     model = Submission
     form_class = SubmissionUpdateForm
     pk_url_kwarg = 'pk'
@@ -90,50 +90,50 @@ class SubmissionUpdateView(generic.UpdateView):
 
 
 @login_required()
-def delete_submission(request, pk):
+def delete_demand(request, pk):
     Submission.objects.filter(id=pk).delete()
     return redirect('home')
 
 
 @method_decorator(login_required, name='dispatch')
-class SubmissionDeleteView(generic.DeleteView):
+class DemandDeleteView(generic.DeleteView):
     model = Submission
     success_url = reverse_lazy('home')
 
 
 @login_required()
-def accept_submission(request, pk):
-    submission = Submission.objects.get(id=pk)
-    submission.status = 1
-    submission.save()
+def accept_demand(request, pk):
+    demand = Submission.objects.get(id=pk)
+    demand.status = 1
+    demand.save()
     message = ""
-    message += str(submission.user)
-    message += " has accepted your submission to submit in "
-    message += str(submission.conference.title)
+    message += str(demand.user)
+    message += " has accepted your demand to submit in "
+    message += str(demand.conference.title)
     send_mail(
-        'a submission for submission',
+        'a demand for submission',
         message,
         'abdelmalek.fathi.2001@gmail.com',
-        [submission.conference.organizer.email]
+        [demand.conference.organizer.email]
     )
-    messages.success(request, 'The submission has ben accepted successfully')
+    messages.success(request, 'The demand has ben accepted successfully')
     return redirect('home')
 
 
 @login_required()
-def refuse_submission(request, pk):
-    submission = Submission.objects.get(id=pk)
-    submission.status = 2
-    submission.save()
+def refuse_demand(request, pk):
+    demand = Submission.objects.get(id=pk)
+    demand.status = 2
+    demand.save()
     message = ""
-    message += str(submission.user)
-    message += " has refused your submission to submit in "
-    message += str(submission.conference.title)
+    message += str(demand.user)
+    message += " has refused your demand to submit in "
+    message += str(demand.conference.title)
     send_mail(
-        'a submission for submission',
+        'a demand for submission',
         message,
         'abdelmalek.fathi.2001@gmail.com',
-        [submission.conference.organizer.email]
+        [demand.conference.organizer.email]
     )
-    messages.success(request, 'The submission has ben refused successfully')
+    messages.success(request, 'The demand has ben refused successfully')
     return redirect('home')
