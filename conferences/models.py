@@ -57,7 +57,7 @@ class Submission(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     email = models.EmailField(verbose_name="email", max_length=254, unique=False)
-    article_name = models.CharField(max_length=100, null=True, blank=True)
+    article_name = models.CharField(max_length=100)
     abstract = models.TextField(verbose_name='abstract')
     article = models.FileField(null=True, blank=True)
     authors = models.ManyToManyField(Author, related_name='article_authors')

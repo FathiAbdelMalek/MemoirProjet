@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{%load static %}
+{% load static %}
 
 {% block title %}Home Page{% endblock %}
-    {% block style%}
-<link rel="stylesheet" href="{% static '/css/home.css' %}">
-
-{% endblock%}
-
+{% block styles %}
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
    <div class="card mb-3" style="max-width: 540px;" id="container">
   <div class="row no-gutters">
     <div class="col-md-4">
@@ -34,4 +33,40 @@
 
 
          
+=======
+    {% for conference in conference_list %}
+        <div class="card mb-3" style="max-width: 540px;" id="container">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{ conference.image }}" >
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title" id="conference">{{ conference.title }}</h2>
+                        <h4 class="card-title" id="date"><i class="fas fa-table"></i> : {{ conference.date }}</h4>
+                        <h4 class="card-title" id="org"><i class="fas fa-user"></i> : {{ conference.organizer }}</h4>
+                        {% if conference.organizer == request.user %}
+                            <a class="btn btn" href="{% url 'conference_update' conference.pk %}">Update</a>
+                            <a class="btn btn" href="{% url 'conference_delete' conference.pk %}">Delete</a>
+                        {% else %}
+                            <a class="btn btn" href="{% url 'submission_create' conference.pk %}">Submit</a>
+                        {% endif %}
+                        <a class="btn btn" href="#">Details</a>
+                    </div>
+                </div>
+            </div>
+            {% for submission in submission_list %}
+                {% if submission.conference == conference %}
+                    {% if submission.user == request.user %}
+                        <div class="container">
+                            {{ submission.first_name }}
+                            <br>
+                            {{ submission.article_name }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+>>>>>>> 9c08a51693d91501c79a922f7c753ed2988fae54
 {% endblock %}
