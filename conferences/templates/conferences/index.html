@@ -29,6 +29,17 @@
                     </div>
                 </div>
             </div>
+            {% for submission in submission_list %}
+                {% if submission.conference == conference %}
+                    {% if submission.user == request.user %}
+                        <div class="container">
+                            {{ submission.first_name }}
+                            <br>
+                            {{ submission.article_name }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
         </div>
     {% endfor %}
 {% endblock %}
