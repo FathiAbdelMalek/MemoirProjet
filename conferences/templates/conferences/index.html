@@ -3,70 +3,44 @@
 {% load static %}
 
 {% block title %}Home Page{% endblock %}
+
 {% block styles %}
     <link rel="stylesheet" href="{% static '/css/home.css' %}">
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
-   <div class="card mb-3" style="max-width: 540px;" id="container">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="" >
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h2 class="card-title" id="conference">Conference title</h2>         
-        <h4 class="card-title" id="date"><i class="fas fa-table"></i> : 2021-9-30</h4>
-        <h4 class="card-title" id="org"><i class="fas fa-user"></i> : organizer</h4>
-        <p class="card-text">This is a description for this conference </p>
-          <a class="btn btn" href="#">Details</a>
-         <a class="btn btn" href="#">Submit</a>
-         
-       
-      </div>
-    </div>
-  </div>
-</div>
-
- 
-
-
-         
-=======
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
     {% for conference in conference_list %}
-        <div class="card mb-3" style="max-width: 540px;" id="container">
+        <div class="card mb-3" style="max-width: 680px;" id="container">
             <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src="{{ conference.image }}" >
-                </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card-body">
                         <h2 class="card-title" id="conference">{{ conference.title }}</h2>
                         <h4 class="card-title" id="date"><i class="fas fa-table"></i> : {{ conference.date }}</h4>
                         <h4 class="card-title" id="org"><i class="fas fa-user"></i> : {{ conference.organizer }}</h4>
+                        <a class="btn btn" href="{% url 'conference' conference.pk %}">Details</a>
                         {% if conference.organizer == request.user %}
                             <a class="btn btn" href="{% url 'conference_update' conference.pk %}">Update</a>
                             <a class="btn btn" href="{% url 'conference_delete' conference.pk %}">Delete</a>
                         {% else %}
                             <a class="btn btn" href="{% url 'submission_create' conference.pk %}">Submit</a>
                         {% endif %}
-                        <a class="btn btn" href="#">Details</a>
                     </div>
                 </div>
             </div>
-            {% for submission in submission_list %}
-                {% if submission.conference == conference %}
-                    {% if submission.user == request.user %}
-                        <div class="container">
-                            {{ submission.first_name }}
-                            <br>
-                            {{ submission.article_name }}
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
         </div>
+        {% for submission in submission_list %}
+            {% if submission.conference == conference %}
+                {% if submission.user == request.user %}
+                    {{ submission.first_name }}
+                    <br>
+                    {{ submission.article_name }}
+                    <button><a href="{% url 'submission_update' submission.pk %}">Update</a></button>
+                    <button><a href="{% url 'submission_delete' submission.pk %}">Delete</a></button>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
     {% endfor %}
->>>>>>> 9c08a51693d91501c79a922f7c753ed2988fae54
 {% endblock %}

@@ -18,6 +18,10 @@ class IndexView(generic.ListView):
         return context
 
 
+class ConferenceView(generic.DetailView):
+    model = Conference
+
+
 @method_decorator(login_required, name='dispatch')
 class ConferenceCreationView(generic.CreateView):
     model = Conference
@@ -86,7 +90,8 @@ class SubmissionUpdateView(generic.UpdateView):
 
     def form_valid(self, form):
         form.save()
-        return redirect('home')
+        messages.success("Submission updated successfully")
+        return redirect('submission_update', 'pk')
 
 
 @login_required()

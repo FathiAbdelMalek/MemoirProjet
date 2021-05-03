@@ -4,5 +4,8 @@
 
 {% block content %}
     <h1>Update Demand</h1>
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
     {% include 'includes/form.html' %}
 {% endblock %}
