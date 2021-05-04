@@ -1,0 +1,66 @@
+#table{
+    width: 50%;
+    margin-top: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    
+}
+#table:hover{
+             
+        box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+  
+}
+th {
+    background-color: #009879;
+    color: white;
+    font-weight: bold;
+    
+    
+}
+
+
+tr:last-of-type {
+  border-bottom: 3px solid #009879;
+}
+td{
+    
+    font-weight: bold;
+}
+td:hover{
+    color: white;
+    font-weight: bold;
+    background: #009879;
+}
+tr:hover {
+    background: #009879;
+    color: white;
+      font-weight: bold;
+}
+#users{
+    width: 53%;
+     text-align: center;
+}
+#users:hover{
+     box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+ 
+}
+.btn.btn1{
+    background:  #ff4d4d;
+    border: 2px solid #ff4d4d ;
+}
+.btn.btn1:hover{
+    background-color: #ff4d4d !important;
+    font-weight: bold;
+}
+.btn.btn0{
+    background: #33ccff;
+     border: 2px solid #33ccff ;
+}
+.btn.btn0:hover{
+    background-color: #33ccff !important;
+    font-weight: bold;
+}

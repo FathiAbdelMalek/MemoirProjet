@@ -5,9 +5,95 @@
 {% block title %}{{ conference.title }}{% endblock %}
 
 {% block styles %}
-
+<link rel="stylesheet" href="{% static '/css/details.css' %}">
 {% endblock %}
 
 {% block content %}
-    {{ conference.title }}
+    
+
+    <table class="table table-bordered" id="table" align="center">
+  
+    <tr>
+      <th>Title</th>
+      <td>coputer science</td>
+      
+    </tr>
+  
+    <tr>
+      <th>description</th>
+      <td>Description conference</td>
+       
+    </tr>
+    <tr >
+       <th>Date</th>
+      <td>2021-9-30</td>
+      
+    </tr>
+    <tr>
+       <th>Submission deadline</th>
+      <td>2021-8-30</td>
+      
+    </tr>
+        <tr>
+       <th>Confirmation deadline</th>
+      <td>2021-9-20</td>
+      
+    </tr>
+        <tr>
+       <th>Payment deadline</th>
+      <td>2021-9-25</td>
+      
+    </tr>
+        <tr>
+       <th>price</th>
+      <td>250</td>
+      
+    </tr>
+         <tr>
+       <th>place</th>
+      <td>tebessa</td>
+      
+    </tr>
+</table>
+<table class="table table-bordered"  align="center" id="users"  >
+  
+    <tr>
+      <th >#</th>
+      <th >username</th>
+      <th >work title</th>
+      <th >request verification</th>
+    </tr>
+  
+  
+    <tr>
+      <th >1</th>
+      <td>abdelmalek fathi</td>
+      <td>computer science doc</td>
+        <td> 
+            <a href="#" class="btn btn0"> Accepte </a>
+            <a href="#" class="btn btn1"> refused </a> 
+          </td>
+    </tr>
+    <tr>
+      <th >2</th>
+         <td>Maammar choukri</td>
+      <td>IA doc</td>
+      <td>
+          <a href="#" class="btn btn0"> Accepte </a>
+          <a href="#" class="btn btn1"> refused </a> 
+          </td>
+      
+    </tr>
+    <tr>
+      <th>3</th>
+         <td>tarek nouioua</td>
+      <td>electronic doc</td>
+      <td> 
+          <a href="#" class="btn btn0"> Accepte </a>
+          <a href="#" class="btn btn1"> refused </a> 
+          </td>
+     
+    </tr>
+  
+</table>
 {% endblock %}
