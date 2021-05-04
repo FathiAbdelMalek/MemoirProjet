@@ -1,10 +1,80 @@
 {% extends 'base.html' %}
-
+{%load static%}
 {% block title %} Profile {% endblock %}
 
+{% block style%} 
+<link rel="stylesheet" href="{% static '/css/profile.css' %}">
+{%endblock%}
 {% block content %}
-    <a href="{% url 'profile_update' user.id %}">Update Profile</a>
-    <p>{{ user.first_name }}</p>
-    <p>{{ user.last_name }}</p>
-    <p>{{ profile.sexe }}</p>
+   <div class="container">
+       <div class="row d-flex justify-content-center">
+       
+       <div class="col-md-8 mt-5 pt-5">
+           <div class="row z-depth-3">
+           <div class="col-sm-4 bg-info rounded-left">
+               <div class="card-block text-center text-white">
+               <i class="fas fa-user-tie fa-7x mt-5"></i>
+                <h2 class="font-weight-bold mt-4"> username</h2>  
+             <a href="#" id="hedit"><i class="far fa-edit fa-2x mb-4" id="edit"></i>edit</a>
+               </div>
+               
+               </div>
+                 <div class="col-sm-8 bg- rounded-right" id="myprofi">
+               
+               <h3 class="mt3 text-center" id="personal">Personal Information</h3>
+                     <hr class="badge-primary mt-0 w-25">
+                     <div class="row">
+                           <div class="col-sm-6">
+                               <h4 class="font-weight-blold">Email</h4>
+                                <p >choukri@gmail.com</p>
+                           </div>
+                         <div class="col-sm-6">
+                               <h4 class="font-weight-blold">first-name</h4>
+                                <p >choukri</p>
+                           </div>
+                         <div class="col-sm-6">
+                               <h4 class="font-weight-blold">last-name</h4>
+                                <p >maammar</p>
+                           </div>
+                         <div class="col-sm-6">
+                               <h4 class="font-weight-blold">birthday</h4>
+                                <p >200-11-25</p>
+                           </div>
+                         <div class="col-sm-6">
+                               <h4 class="font-weight-blold">sexe</h4>
+                                <p >man</p>
+                           </div>
+                         <div class="col-sm-6">
+                               <h4 class="font-weight-blold">Country</h4>
+                                <p >algeria</p>
+                           </div>
+                         
+                     </div>
+                     <h3 class="mt-3" id="personal">Projects</h3>
+                     <hr class="bg-primary">
+                     <div class="row">
+                      <div class="col-sm-6">
+                               <h4 class="font-weight-blold">my conferences</h4>
+                                <p >conferences</p>
+                           </div>
+                        </div>
+                        
+                     </div>
+                     
+               </div>
+           
+           </div>
+           
+           </div>
+       
+       
+       </div>
+
+
+
+
+
+ 
 {% endblock %}
+ 
+

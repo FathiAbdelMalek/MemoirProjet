@@ -1,0 +1,31 @@
+#myprofi{
+    background-color:  #ccf5ff;
+    
+}
+#personal{
+    font-weight: bold;
+    color:  #ffa64d;
+    font-family: cursive;
+    
+}
+div h4{
+    color:  #5F5FB0;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+#myprofi:hover{
+    
+             
+        box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+
+}
+#edit{
+    color: white;
+}
+#hedit{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
