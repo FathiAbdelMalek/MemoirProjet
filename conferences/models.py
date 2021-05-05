@@ -58,7 +58,7 @@ class Submission(models.Model):
     email = models.EmailField(verbose_name="email", max_length=254, unique=False)
     article_name = models.CharField(max_length=100)
     abstract = models.TextField(verbose_name='abstract')
-    article = models.FileField(null=True, blank=True)
+    article = models.FileField(null=True, blank=True, upload_to='files')
     authors = models.ManyToManyField(Author, related_name='article_authors', null=True, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
     demand_date = models.DateTimeField(auto_now_add=True)
@@ -66,4 +66,4 @@ class Submission(models.Model):
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user + " submission in " + self.conference
+        return str(self.user) + " submission in " + str(self.conference)

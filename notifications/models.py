@@ -10,9 +10,10 @@ User = get_user_model()
 
 class Notification(models.Model):
     TYPE = (
-        (0, 'Demand Subscribe'),
-        (1, 'Accept Demand'),
-        (2, 'Refuse Demand'),
+        (0, 'New Submission'),
+        (1, 'Edited Submission'),
+        (2, 'Accept Demand'),
+        (3, 'Refuse Demand'),
     )
 
     type = models.IntegerField(choices=TYPE)
@@ -36,9 +37,17 @@ def add_submission(instance, created, *args, **kwargs):
             receiver=instance.conference.organizer,
         )
     else:
-        if instance.status == 1:
+        if instance.status == 0:
             notify = Notification(
                 type=1,
+                demand=instance,
+                conference=instance.conference,
+                sender=instance.user,
+                receiver=instance.conference.organizer
+            )
+        elif instance.status == 1:
+            notify = Notification(
+                type=2,
                 demand=instance,
                 conference=instance.conference,
                 sender=instance.conference.organizer,
@@ -46,7 +55,7 @@ def add_submission(instance, created, *args, **kwargs):
             )
         elif instance.status == 2:
             notify = Notification(
-                type=2,
+                type=3,
                 demand=instance,
                 conference=instance.conference,
                 sender=instance.conference.organizer,

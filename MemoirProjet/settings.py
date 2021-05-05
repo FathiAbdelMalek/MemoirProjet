@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'conferences.apps.ConferencesConfig',
-    'admins.apps.AdminsConfig',
     'accounts.apps.AccountsConfig',
     'profiles.apps.ProfilesConfig',
     'notifications.apps.NotificationsConfig',
@@ -62,7 +61,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates',
-                 BASE_DIR / 'admins/templates',
                  BASE_DIR / 'accounts/templates',
                  BASE_DIR / 'profiles/templates',
                  BASE_DIR / 'conferences/templates',

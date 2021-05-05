@@ -1,10 +1,16 @@
+import os.path
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.core.mail import send_mail
+
+from MemoirProjet import settings
 from .models import Conference, Submission
 from .forms import ConferenceCreationForm, ConferenceUpdateForm, SubmissionCreationForm, SubmissionUpdateForm
 
@@ -20,6 +26,12 @@ class IndexView(generic.ListView):
 
 class ConferenceView(generic.DetailView):
     model = Conference
+    pk_url_kwarg = 'pk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['submission_list'] = Submission.objects.filter(conference=self.kwargs['pk'])
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
@@ -68,9 +80,8 @@ class SubmissionCreationView(generic.CreateView):
         submission.user = self.request.user
         submission.conference = Conference.objects.get(id=self.kwargs['conf_pk'])
         submission.save()
-        messages.success(self.request, 'You submission to subscribe successfully')
-        message = ""
-        message += str(submission.user)
+        messages.success(self.request, 'Your submission to subscribe has been created successfully')
+        message = str(submission.user)
         message += " has submission to submit in your conference "
         message += str(submission.conference.title)
         send_mail(
@@ -90,8 +101,8 @@ class SubmissionUpdateView(generic.UpdateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success("Submission updated successfully")
-        return redirect('submission_update', 'pk')
+        messages.success(self.request, "Submission updated successfully")
+        return redirect('home')
 
 
 @login_required()
@@ -111,8 +122,7 @@ def accept_submission(request, pk):
     submission = Submission.objects.get(id=pk)
     submission.status = 1
     submission.save()
-    message = ""
-    message += str(submission.user)
+    message = str(submission.user)
     message += " has accepted your submission to submit in "
     message += str(submission.conference.title)
     send_mail(
@@ -130,8 +140,7 @@ def refuse_submission(request, pk):
     submission = Submission.objects.get(id=pk)
     submission.status = 2
     submission.save()
-    message = ""
-    message += str(submission.user)
+    message = str(submission.user)
     message += " has refused your submission to submit in "
     message += str(submission.conference.title)
     send_mail(
@@ -142,3 +151,13 @@ def refuse_submission(request, pk):
     )
     messages.success(request, 'The submission has ben refused successfully')
     return redirect('home')
+
+
+def download(request, path):
+    path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(path):
+        with open(path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/article")
+            response['Content-Disposition'] = 'inline;filename='+os.path.basename(path)
+            return response
+        raise Http404

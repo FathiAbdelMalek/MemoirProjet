@@ -9,99 +9,73 @@
 {% endblock %}
 
 {% block content %}
-<div class="card mb-3" style="max-width: 540px;" id="container">
-      <div class="row no-gutters">
-                <div class="col-md-12">
-                    <div class="card-body">
-                        <h2 class="descreption" > descreption </h2>
-                        <pre> this is descreption of this conference
-                        -computer science
-                        -artificial intelegence
-                        -electronice
-                        </pre>
-                    </div>
-                </div>
-    </div>
-</div>
-
     <table class="table table-bordered" id="table" align="center">
-  
-    <tr>
-      <th>Title</th>
-      <td>coputer science</td>
-      
-    </tr>
-  
-    <tr >
-       <th>Date</th>
-      <td>2021-9-30</td>
-      
-    </tr>
-    <tr>
-       <th>Submission deadline</th>
-      <td>2021-8-30</td>
-      
-    </tr>
         <tr>
-       <th>Confirmation deadline</th>
-      <td>2021-9-20</td>
-      
-    </tr>
+            <th>Title</th>
+            <td>{{ conference.title }}</td>
+        </tr>
+        <tr >
+            <th>Date</th>
+            <td>{{ conference.date }}</td>
+        </tr>
         <tr>
-       <th>Payment deadline</th>
-      <td>2021-9-25</td>
-      
-    </tr>
+            <th>Submission deadline</th>
+            <td>{{ conference.submission_deadline }}</td>
+        </tr>
         <tr>
-       <th>price</th>
-      <td>250$</td>
-      
-    </tr>
-         <tr>
-       <th>place</th>
-      <td>tebessa</td>
-      
-    </tr>
-</table>
-<table class="table table-bordered"  align="center" id="users"  >
-  
-    <tr>
-      <th >#</th>
-      <th >username</th>
-      <th >work title</th>
-      <th >request verification</th>
-    </tr>
-  
-  
-    <tr>
-      <th >1</th>
-      <td>abdelmalek fathi</td>
-      <td>computer science doc</td>
-        <td> 
-            <a href="#" class="btn btn0"> Accepte </a>
-            <a href="#" class="btn btn1"> refused </a> 
-          </td>
-    </tr>
-    <tr>
-      <th >2</th>
-         <td>Maammar choukri</td>
-      <td>IA doc</td>
-      <td>
-          <a href="#" class="btn btn0"> Accepte </a>
-          <a href="#" class="btn btn1"> refused </a> 
-          </td>
-      
-    </tr>
-    <tr>
-      <th>3</th>
-         <td>tarek nouioua</td>
-      <td>electronic doc</td>
-      <td> 
-          <a href="#" class="btn btn0"> Accepte </a>
-          <a href="#" class="btn btn1"> refused </a> 
-          </td>
-     
-    </tr>
-  
-</table>
+            <th>Confirmation deadline</th>
+            <td>{{ conference.confirmation_deadline }}</td>
+        </tr>
+        <tr>
+            <th>Payment deadline</th>
+            <td>{{ conference.payment_deadline }}</td>
+        </tr>
+        <tr>
+            <th>price</th>
+            <td>{{ conference.price }}</td>
+        </tr>
+        <tr>
+            <th>place</th>
+            <td>{{ conference.place }}</td>
+        </tr>
+    </table>
+    <div class="card mb-3" style="max-width: 540px;" id="container">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="card-body">
+                    <h2 class="descreption" > Description </h2>
+                    <pre>{{ conference.description }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if request.user == conference.organizer %}
+        <table class="table table-bordered"  align="center" id="users"  >
+            {% for submission in submission_list %}
+                <tr>
+                    <th>username</th>
+                    <th>Article Name</th>
+                    <th>Abstract</th>
+                    <th>The Article</th>
+                    {% if conference.can_confirm %}
+                        <th>request verification</th>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>{{ submission.user }}</td>
+                    <td>{{ submission.article_name }}</td>
+                    <td>{{ submission.abstract }}</td>
+                    {% if submission.article %}
+                        <td><a href="{{ submission.article.url }}" download="{{ submission.article.url }}">Download</a></td>
+                    {% endif %}
+                    {% if conference.can_confirm %}
+                        <td>
+                            <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0"> Accept </a>
+                            <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1"> Refuse </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 {% endblock %}

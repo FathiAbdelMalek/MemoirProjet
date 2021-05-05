@@ -22,6 +22,7 @@ class Profile(models.Model):
     )
 
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    image = models.FileField(null=True, blank=True, upload_to='images')
     birth_date = models.DateField(verbose_name="birth date", null=True, blank=True)
     sexe = models.IntegerField(choices=SEXE, null=True, blank=True)
     country = CountryField(null=True, blank=True)
