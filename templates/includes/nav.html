@@ -14,10 +14,13 @@
                 </a>
             </li>
             {% if user.is_authenticated %}
+           
                 <li class="nav-item " >
-                    <a href="{% url 'notifications' %}" class="nav-link" >
+                    <a href="{% url 'notifications' %}" class="nav-link "  >
                         <i class="fas fa-bell"></i> Notifications
+                
                         {% if count_notifications %}
+                         
                             {{ count_notifications }}
                         {% endif %}
                     </a>
