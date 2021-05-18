@@ -1,7 +1,9 @@
 {% load widget_tweaks %}
 
-<form method="post" enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
+{#<form method="post" enctype="multipart/form-data" novalidate>#}
+    {% for error in form.non_field_errors %}
+        {{ error }}
+    {% endfor %}
     {% for field in form %}
         <div class="form-group">
             {{ field.label_tag }}
@@ -22,5 +24,4 @@
             {% endif %}
         </div>
     {% endfor %}
-    <input class="btn btn-primary" type="submit" name="submit" id="submit" value="Submit">
-</form>
+{#</form>#}

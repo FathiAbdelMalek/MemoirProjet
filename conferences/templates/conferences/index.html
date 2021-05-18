@@ -1,12 +1,7 @@
 {% extends 'base.html' %}
 {% load humanize %}
-{% load static %}
 
 {% block title %}Home Page{% endblock %}
-
-{% block styles %}
-    <link rel="stylesheet" href="{% static '/css/home.css' %}">
-{% endblock %}
 
 {% block content %}
     {% for message in messages %}

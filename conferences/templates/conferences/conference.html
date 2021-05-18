@@ -1,12 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load humanize %}
 
 {% block title %}{{ conference.title }}{% endblock %}
-
-{% block styles %}
-<link rel="stylesheet" href="{% static '/css/details.css' %}">
-{% endblock %}
 
 {% block content %}
     <table class="table table-bordered" id="table" align="center">
