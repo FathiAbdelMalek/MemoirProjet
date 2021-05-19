@@ -1,6 +1,7 @@
 <aside>
-    <form class="search" style="margin:auto;max-width:300px">
-        <input class="input" type="text" placeholder="Search.." >
+    <form class="search" method="get" action="{% url 'search' %}" style="margin: auto; max-width: 300px">
+        {% csrf_token %}
+        <input class="input" type="search" name="search" placeholder="Search.." >
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
     <a href="{% url 'home' %}">Conferences</a>

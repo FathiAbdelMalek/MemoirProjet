@@ -67,22 +67,16 @@
                         <i class="fas fa-sign-in-alt"></i> Login
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="modal" data-target="#modal">
-                    <a class="nav-link" href="{% url 'register' %}">
+                <li class="nav-item" id="register-btn" data-toggle="modal" data-target="#modal">
+                    <a href="{% url 'register' %}" class="nav-link">
                         <i class="fas fa-user-plus"></i> Register
                     </a>
                 </li>
-                <script>
-                    $('#modal').on('show.bs.modal', function (event) {
-                        var modal = $(this)
-                        $.ajax({
-                            url: "{% url 'register' %}",
-                            context: document.body
-                        }).done(function(response) {
-                            modal.html(response);
-                        });
-                    })
-                </script>
+                <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content"></div>
+                  </div>
+                </div>
             {% endif %}
         </ul>
     </div>

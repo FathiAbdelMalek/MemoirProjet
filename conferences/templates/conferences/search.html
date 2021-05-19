@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Result{% endblock %}
+
+{% block content %}
+    {% for conference in search_result %}
+        <div class="card mb-3" style="max-width: 680px;" id="container">
+            <div class="row no-gutters">
+                <div class="col-md-12">
+                    <div class="card-body text-center">
+                        <h2 class="card-title" id="conference">{{ conference.title }}</h2>
+                        <h4 class="card-title" id="date"><i class="fas fa-table"></i> : {{ conference.date }}</h4>
+                        <h4 class="card-title" id="org"><i class="fas fa-user"></i> : {{ conference.organizer }}</h4>
+                        <a class="btn btn" href="{% url 'conference' conference.pk %}">Details</a>
+                        {% if conference.organizer == request.user %}
+                            <a class="btn btn" href="{% url 'conference_update' conference.pk %}">Update</a>
+                            <a class="btn btn" href="{% url 'conference_delete' conference.pk %}">Delete</a>
+                        {% else %}
+                            <a class="btn btn" href="{% url 'submission_create' conference.pk %}">Submit</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for submission in submission_list %}
+            {% if submission.conference == conference %}
+                {% if submission.user == request.user %}
+                    {{ submission.first_name }}
+                    <br>
+                    {{ submission.article_name }}
+                    <button><a href="{% url 'submission_update' submission.pk %}">Update</a></button>
+                    <button><a href="{% url 'submission_delete' submission.pk %}">Delete</a></button>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% empty %}
+        add something to show no results
+    {% endfor %}
+{% endblock %}

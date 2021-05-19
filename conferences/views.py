@@ -23,6 +23,21 @@ class IndexView(generic.ListView):
         return context
 
 
+class SearchView(generic.ListView):
+    model = Conference
+    context_object_name = 'search_result'
+
+    def get_queryset(self):
+        result = super(SearchView, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+            post_result = Conference.objects.filter(title__contains=query)
+            result = post_result
+        else:
+            result = None
+        return result
+
+
 class ConferenceView(generic.DetailView):
     model = Conference
     pk_url_kwarg = 'pk'
