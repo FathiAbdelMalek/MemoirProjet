@@ -13,13 +13,10 @@
                 </a>
             </li>
             {% if user.is_authenticated %}
-           
                 <li class="nav-item " >
                     <a href="{% url 'notifications' %}" class="nav-link "  >
                         <i class="fas fa-bell"></i> Notifications
-                
                         {% if count_notifications %}
-                         
                             {{ count_notifications }}
                         {% endif %}
                     </a>
@@ -65,37 +62,27 @@
                     </li>
                 </div>
             {% else %}
-                <li class="nav-item ">
-{#                    <a class="nav-link">#}
-{#                        <i class="fas fa-sign-in-alt"></i> Login#}
-{#                    </a>#}
-                    <a href="#" class="nav-link">Login</a>
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
                 </li>
-                <li class="nav-item " >
-                    <a class="nav-link" onclick="openForm()">
+                <li class="nav-item" data-toggle="modal" data-target="#modal">
+                    <a class="nav-link" href="{% url 'register' %}">
                         <i class="fas fa-user-plus"></i> Register
                     </a>
-                    <div class="form-popup" id="myForm">
-                        <form class="form-container" method="post">
-                            {% csrf_token %}
-                            {% include 'includes/form.html' %}
-                            <button class="btn btn-primary" type="submit" name="submit" id="submit">Register</button>
-                            <button class="btn btn-danger" onclick="closeForm()">Close</button>
-                        </form>
-                    </div>
-{#                            <h1>Login</h1>#}
-{##}
-{#                            <label for="email"><b>Email</b></label>#}
-{#                            <input type="text" placeholder="Enter Email" name="email" required>#}
-{##}
-{#                            <label for="psw"><b>Password</b></label>#}
-{#                            <input type="password" placeholder="Enter Password" name="psw" required>#}
-{##}
-{#                            <button class="btn btn-primary" type="submit" name="submit" id="submit">Login</button>#}
-{#                            <button class="btn btn-danger" onclick="closeForm()">Close</button>#}
-{#                        </form>#}
-{#                    </div>#}
                 </li>
+                <script>
+                    $('#modal').on('show.bs.modal', function (event) {
+                        var modal = $(this)
+                        $.ajax({
+                            url: "{% url 'register' %}",
+                            context: document.body
+                        }).done(function(response) {
+                            modal.html(response);
+                        });
+                    })
+                </script>
             {% endif %}
         </ul>
     </div>
