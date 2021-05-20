@@ -62,12 +62,16 @@
                     <td>{{ submission.abstract }}</td>
                     {% if submission.article %}
                         <td><a href="{{ submission.article.url }}" download="{{ submission.article.url }}">Download</a></td>
+                    {% else %}
+                        <td></td>
                     {% endif %}
                     {% if conference.can_confirm %}
                         <td>
                             <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0"> Accept </a>
                             <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1"> Refuse </a>
                         </td>
+                    {% else %}
+                        <td></td>
                     {% endif %}
                 </tr>
             {% endfor %}

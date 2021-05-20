@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from MemoirProjet import settings
 from .models import Conference, Submission
 from .forms import ConferenceCreationForm, ConferenceUpdateForm, SubmissionCreationForm, SubmissionUpdateForm
+from .filters import ConferenceFilter
 
 
 class IndexView(generic.ListView):
@@ -19,23 +20,13 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        conferences = Conference.objects.all()
+        filter = ConferenceFilter(self.request.GET, queryset=conferences)
+        conferences = filter.qs
+        context['conference_list'] = conferences
         context['submission_list'] = Submission.objects.all()
+        context['filter'] = filter
         return context
-
-
-class SearchView(generic.ListView):
-    model = Conference
-    context_object_name = 'search_result'
-
-    def get_queryset(self):
-        result = super(SearchView, self).get_queryset()
-        query = self.request.GET.get('search')
-        if query:
-            post_result = Conference.objects.filter(title__contains=query)
-            result = post_result
-        else:
-            result = None
-        return result
 
 
 class ConferenceView(generic.DetailView):

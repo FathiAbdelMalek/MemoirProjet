@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'notifications.apps.NotificationsConfig',
     'widget_tweaks',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
