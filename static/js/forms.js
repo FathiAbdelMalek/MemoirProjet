@@ -6,3 +6,6 @@ function closeForm() {
   document.getElementById("registerForm").style.display = "none";
 }
 
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
