@@ -1,0 +1,12 @@
+# Fdb version 3
+["pdflatex"] 1621545054 "main.tex" "main.pdf" "main" 1621545054
+  "/home/fathi/.texlive2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1621543082 351886 c3f48820abc08c493f5174fc1912123d ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1612290914 20023 e427dd9e17e239bf926ef3aab67fe35e ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1612290914 8446 9874cccac5fee462272c582807dbbf56 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/subfiles/subfiles.sty" 1605478891 5262 70ab9987ec94ed2beeb5c2d951d465f6 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1612290070 39615 33f7d51cf394547e122c9714408659b1 ""
+  "main.aux" 1621353990 1507 7d71a2cbe36ed98c8ef25a095c86054d ""
+  "main.tex" 1621545054 799 019197e8ba31b4b5f8e7acb22f3c41f7 ""
+  (generated)
+  "main.log"
+  "main.pdf"
