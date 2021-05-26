@@ -1,20 +1,34 @@
+* {
+    font-family: sans-serif;
+}
+
 #container{
     background-color: #ccfff5;
     margin: auto;
     margin-top: 20px;
     border-radius: 50px;
-    
-
-    
 }
+
 #container:hover{
-              
-        box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-
-
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
 }
+
+.submission {
+    background-color: #AEE4E8;
+    border-radius: 30px;
+    width: 60%;
+    margin: auto;
+}
+
+.submission-text {
+    text-align: center;
+    font-weight: bold;
+    color: #ff8000;
+    display: block;
+}
+
 a.btn {
     border: 1px;
     margin: 20px auto;

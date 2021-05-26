@@ -25,7 +25,7 @@ SECRET_KEY = 'eii91w9^)b273!t-2aw%*sc(r2$!^pexy)wez4yy&m$2htjs39'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'profiles.apps.ProfilesConfig',
     'notifications.apps.NotificationsConfig',
-    'widget_tweaks',
     'django_filters',
+    'bootstrapform',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -128,10 +129,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 AUTH_USER_MODEL = 'accounts.User'
 LOGOUT_REDIRECT_URL = 'home'

@@ -31,3 +31,6 @@ urlpatterns = [
     path('submission/accepted/<int:pk>/', views.accept_submission, name='submission_accepted'),
     path('submission/refused/<int:pk>/', views.refuse_submission, name='submission_refused'),
 ]
+
+handler404 = 'conferences.views.error_404_handler'
+handler500 = 'conferences.views.error_500_handler'

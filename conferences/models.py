@@ -24,6 +24,7 @@ class Conference(models.Model):
     confirmation_deadline = models.DateField(null=True, blank=True)
     payment_deadline = models.DateField(null=True, blank=True)
     price = models.CharField(max_length=20, null=True, blank=True)
+    # post_price = models.CharField(max_length=20, null=True, blank=True)
     organizer = models.ForeignKey(User, on_delete=models.RESTRICT)
 
     def __str__(self):

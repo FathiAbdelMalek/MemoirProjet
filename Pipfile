@@ -10,6 +10,7 @@ django-widget-tweaks = "*"
 pillow = "*"
 django-filter = "*"
 gunicorn = "*"
+django-bootstrap-form = "*"
 
 [dev-packages]
 

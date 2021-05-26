@@ -3,6 +3,16 @@
 {% block title %}Create new Conference{% endblock %}
 
 {% block content %}
-    <h1>Create Conference</h1>
-    {% include 'includes/form.html' %}
+    <div class="card text-center mt-4" style="margin: auto; width: 80%;">
+        <form method="post" enctype="multipart/form-data">
+            <div class="card-header" style="background-color: #0099cc; color: white;">
+                <h1>Create new Conference</h1>
+            </div>
+            {% include 'includes/form.html' %}
+            <div class="card-footer text-muted">
+                <button class="btn btn-primary">Create new Conference</button>
+            <div><a href="{% url 'home' %}">Return home</a></div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

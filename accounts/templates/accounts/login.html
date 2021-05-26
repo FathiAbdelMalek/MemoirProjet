@@ -3,17 +3,18 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-header">
-            <h1 class="text-center">Login</h1>
-        </div>
-        <div class="card-body">
+    <div class="card text-center mt-4" style="margin: auto; width: 80%;">
+        <form method="post" enctype="multipart/form-data">
+            <div class="card-header" style="background-color: #0099cc; color: white;">
+                <h1>Login</h1>
+            </div>
             {% include 'includes/form.html' %}
-        </div>
-        <div class="card-footer">
+            <div class="card-footer text-muted">
+                <button class="btn btn-primary">Login</button>
             <div><a href="{% url 'password_reset' %}">forgot password ?</a></div>
             <div><a href="{% url 'register' %}">new user ?</a></div>
             <div><a href="{% url 'home' %}">Return home</a></div>
-        </div>
+            </div>
+        </form>
     </div>
 {% endblock %}

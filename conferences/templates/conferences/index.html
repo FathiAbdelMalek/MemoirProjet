@@ -1,29 +1,23 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load bootstrap %}
 
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
+    <div>
+        <div>
+            <form method="get"  class="search">
+                {% csrf_token %}
+                {{ filter.form|bootstrap }}
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
     {% for message in messages %}
-        {{ message }}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
     {% endfor %}
-    <nav>
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo;</a>
-            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-        {% endif %}
-        {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-                <strong>{{ num }}</strong>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                <a href="?page={{ num }}">{{ num }}</a>
-            {% endif %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
-        {% endif %}
-    </nav>
+    {% include 'includes/paginator.html' %}
     {% for conference in conference_list %}
         <div class="card mb-3" style="max-width: 680px;" id="container">
             <div class="row no-gutters">
@@ -37,7 +31,9 @@
                             <a class="btn btn" href="{% url 'conference_update' conference.pk %}">Update</a>
                             <a class="btn btn" href="{% url 'conference_delete' conference.pk %}">Delete</a>
                         {% else %}
-                            <a class="btn btn" href="{% url 'submission_create' conference.pk %}">Submit</a>
+                            {% if conference.can_submit %}
+                                <a class="btn btn" href="{% url 'submission_create' conference.pk %}">Submit</a>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
@@ -46,13 +42,22 @@
         {% for submission in submission_list %}
             {% if submission.conference == conference %}
                 {% if submission.user == request.user %}
-                    {{ submission.first_name }}
-                    <br>
-                    {{ submission.article_name }}
-                    <button><a href="{% url 'submission_update' submission.pk %}">Update</a></button>
-                    <button><a href="{% url 'submission_delete' submission.pk %}">Delete</a></button>
+                    <div class="submission  ">
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                <div class="card-body text-center">
+                                    <span class="submission-text">You are submitted in this conference</span>
+                                    {% if conference.can_submit %}
+                                        <a class="btn btn0" href="{% url 'submission_update' submission.pk %}">Update</a>
+                                        <a class="btn btn1" href="{% url 'submission_delete' submission.pk %}">Delete</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
             {% endif %}
         {% endfor %}
     {% endfor %}
+    {% include 'includes/paginator.html' %}
 {% endblock %}

@@ -40,39 +40,42 @@
                 <div class="card-body text-center">
                     <h2 class="descreption" > Description </h2>
                     <pre>{{ conference.description }}</pre>
+                    {% if conference.organizer != request.user %}
+                        {% if conference.can_submit %}
+                            <a href="{% url 'submission_create' conference.pk %}" class="btn btn">Submit</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'conference_update' conference.pk %}" class="btn btn">Update</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
     {% if request.user == conference.organizer %}
         <table class="table table-bordered"  align="center" id="users"  >
+            <tr>
+                <th>username</th>
+                <th>Article Name</th>
+                <th>Abstract</th>
+                <th>The Article</th>
+                <th>request verification</th>
+            </tr>
             {% for submission in submission_list %}
-                <tr>
-                    <th>username</th>
-                    <th>Article Name</th>
-                    <th>Abstract</th>
-                    <th>The Article</th>
-                    {% if conference.can_confirm %}
-                        <th>request verification</th>
-                    {% endif %}
-                </tr>
                 <tr>
                     <td>{{ submission.user }}</td>
                     <td>{{ submission.article_name }}</td>
                     <td>{{ submission.abstract }}</td>
-                    {% if submission.article %}
-                        <td><a href="{{ submission.article.url }}" download="{{ submission.article.url }}">Download</a></td>
-                    {% else %}
-                        <td></td>
-                    {% endif %}
-                    {% if conference.can_confirm %}
-                        <td>
-                            <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0"> Accept </a>
-                            <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1"> Refuse </a>
-                        </td>
-                    {% else %}
-                        <td></td>
-                    {% endif %}
+                    <td>
+                        {% if submission.article %}
+                            <a href="{{ submission.article.url }}" download="{{ submission.article.url }}">Download</a>
+                        {% else %}
+                            None Article
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0 {% if not conference.can_confirm %}disabled{% endif %}"> Accept </a>
+                        <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1 {% if not conference.can_confirm %}disabled{% endif %}"> Refuse </a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>

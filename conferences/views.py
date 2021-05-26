@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -19,7 +19,7 @@ from .filters import ConferenceFilter
 
 class IndexView(generic.ListView):
     model = Conference
-    paginate_by = 1
+    # paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,12 +93,12 @@ class SubmissionCreationView(generic.CreateView):
         message = str(submission.user)
         message += " has submission to submit in your conference "
         message += str(submission.conference.title)
-        send_mail(
-            'a submission for submission',
-            message,
-            'abdelmalek.fathi.2001@gmail.com',
-            [submission.conference.organizer.email]
-        )
+        # send_mail(
+        #     'a submission for submission',
+        #     message,
+        #     'abdelmalek.fathi.2001@gmail.com',
+        #     [submission.conference.organizer.email]
+        # )
         return redirect('home')
 
 
@@ -170,3 +170,11 @@ def download(request, path):
             response['Content-Disposition'] = 'inline;filename='+os.path.basename(path)
             return response
         raise Http404
+
+
+def error_404_handler(request, exception):
+    return render('404.html')
+
+
+def error_500_handler(request):
+    return render('500.html')

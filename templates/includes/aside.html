@@ -1,13 +1,12 @@
+{% load bootstrap %}
+
 <aside>
-    <a href="{% url 'home' %}">Conferences</a>
-    <a href="#"><i class="fas fa-info-circle"></i> About</a>
-    <a href="#"><i class="fas fa-envelope-square"></i>  Contact</a>
     {% if filter %}
         <div>
             <h3>Filter with</h3>
             <form class="search" method="get" style="margin: auto; max-width: 300px">
                 {% csrf_token %}
-                {{ filter.form }}
+                {{ filter.form|bootstrap }}
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
