@@ -2,9 +2,11 @@ import os.path
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.core.mail import send_mail
@@ -17,13 +19,14 @@ from .filters import ConferenceFilter
 
 class IndexView(generic.ListView):
     model = Conference
+    paginate_by = 1
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         conferences = Conference.objects.all()
         filter = ConferenceFilter(self.request.GET, queryset=conferences)
         conferences = filter.qs
-        context['conference_list'] = conferences
+        context['object_list'] = conferences
         context['submission_list'] = Submission.objects.all()
         context['filter'] = filter
         return context
@@ -59,6 +62,7 @@ class ConferenceUpdateView(generic.UpdateView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "Conference updated successfully")
         return redirect('home')
 
 
