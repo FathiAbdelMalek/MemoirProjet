@@ -5,59 +5,68 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
-    <div>
-        <div>
-            <form method="get"  class="search">
-                {% csrf_token %}
-                {{ filter.form|bootstrap }}
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+    <div class="filter">
+        <form method="get"  class="search">
+            {% csrf_token %}
+            {{ filter.form }}
+            <button type="submit"><i class="fa fa-search"></i>Search</button>
+        </form>
     </div>
     {% for message in messages %}
         <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
     {% endfor %}
-    {% include 'includes/paginator.html' %}
-    {% for conference in conference_list %}
-        <div class="card mb-3" style="max-width: 680px;" id="container">
-            <div class="row no-gutters">
-                <div class="col-md-12">
-                    <div class="card-body text-center">
-                        <h2 class="card-title" id="conference">{{ conference.title }}</h2>
-                        <h4 class="card-title" id="date"><i class="fas fa-table"></i> : {{ conference.date }}</h4>
-                        <h4 class="card-title" id="org"><i class="fas fa-user"></i> : {{ conference.organizer }}</h4>
-                        <a class="btn btn" href="{% url 'conference' conference.pk %}">Details</a>
-                        {% if conference.organizer == request.user %}
-                            <a class="btn btn" href="{% url 'conference_update' conference.pk %}">Update</a>
-                            <a class="btn btn" href="{% url 'conference_delete' conference.pk %}">Delete</a>
-                        {% else %}
-                            {% if conference.can_submit %}
-                                <a class="btn btn" href="{% url 'submission_create' conference.pk %}">Submit</a>
+    {% if page_obj.has_next or page_obj.has_previous %}
+        {% include 'includes/paginator.html' %}
+    {% endif %}
+    {% if object_list %}
+        {% for conference in page_obj %}
+            <div class="card mb-3" id="container">
+                <div class="row no-gutters">
+                    <div class="col-md-12">
+                        <div class="card-body text-center">
+                            <h1 class="card-title" id="conference">{{ conference.title }}</h1>
+                            <h3 class="card-title org"><i class="fas fa-table"></i> : {{ conference.date }}</h3>
+                            <h3 class="card-title org"><i class="fas fa-user"></i> : {{ conference.organizer }}</h3>
+                            <h3 class="card-title org"><i class="fas fa-map-marked-alt"></i> : {{ conference.place }}</h3>
+                            <a class="btn btn" href="{% url 'conference' conference.pk %}">Details</a>
+                            {% if conference.organizer == request.user %}
+                                <a class="btn btn" href="{% url 'conference_update' conference.pk %}">Update</a>
+                                <a class="btn btn" href="{% url 'conference_delete' conference.pk %}">Delete</a>
+                            {% else %}
+                                {% if conference.can_submit %}
+                                    <a class="btn btn" href="{% url 'submission_create' conference.pk %}">Submit</a>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% for submission in submission_list %}
-            {% if submission.conference == conference %}
-                {% if submission.user == request.user %}
-                    <div class="submission  ">
-                        <div class="row no-gutters">
-                            <div class="col-md-12">
-                                <div class="card-body text-center">
-                                    <span class="submission-text">You are submitted in this conference</span>
-                                    {% if conference.can_submit %}
-                                        <a class="btn btn0" href="{% url 'submission_update' submission.pk %}">Update</a>
-                                        <a class="btn btn1" href="{% url 'submission_delete' submission.pk %}">Delete</a>
-                                    {% endif %}
+            {% for submission in submission_list %}
+                {% if submission.conference == conference %}
+                    {% if submission.user == request.user %}
+                        <div class="submission">
+                            <div class="row no-gutters">
+                                <div class="col-md-12">
+                                    <div class="card-body text-center">
+                                        <span class="submission-text">You are submitted in this conference</span>
+                                        {% if conference.can_submit %}
+                                            <a class="btn btn0" href="{% url 'submission_update' submission.pk %}">Update</a>
+                                            <a class="btn btn1" href="{% url 'submission_delete' submission.pk %}">Delete</a>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-    {% include 'includes/paginator.html' %}
+    {% else %}
+        <div id="container" style="padding: 30px">
+            <h1 style="color: #ff8000; text-align: center">There is no conferences</h1>
+        </div>
+    {% endif %}
+    {% if page_obj.has_next or page_obj.has_previous %}
+        {% include 'includes/paginator.html' %}
+    {% endif %}
 {% endblock %}

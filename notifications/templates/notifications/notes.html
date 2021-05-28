@@ -2,30 +2,66 @@
 {% load humanize %}
 {% block title %}Notifications{% endblock %}
 {% block content %}
-  <div class="card mb-3" style="max-width: 720px;" id="container">
-        <div class="row no-gutters">
-            <div class="col-md-12">
-                <div class="card-body">
-                    <h1 class="notf"><i class="fas fa-bell"></i>Notifications</h1> 
-                    <hr class="badge-info mt-0 w-30">
+<div class="card mb-3" id="container">
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <div class="card-body">
+                <h1 class="notf"><i class="fas fa-bell"></i>Notifications</h1>
+                <hr class="badge-info mt-0 w-30">
+                {% if notifications %}
                     {% for notification in notifications %}
                         <h5 class="demand">
                             {% if notification.type == 0 %}
-                                <i class="fas fa-user"></i> {{ notification.sender }} has demand a submission for your conference {{ notification.conference }} <a href="{% url 'notification_delete' notification.pk %}" ><i class="fas fa-trash-alt" id="delete"></i></a>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <a class="not-link" href="">{{ notification.sender }}</a>
+                                         has demand a submission for your conference
+                                        <a class="not-link" href="{% url 'conference' notification.conference.pk %}">{{ notification.conference }}</a>
+                                    </div>
+                                    <div class="col-1">
+                                        <a class="delete" href="{% url 'notification_delete' notification.pk %}" ><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
                             {% elif notification.type == 2 %}
-                                <i class="fas fa-user"></i> {{ notification.sender }} has accepted your demand to submission for {{ notification.conference }} <a href="{% url 'notification_delete' notification.pk %}" ><i class="fas fa-trash-alt" id="delete"></i></a>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <a class="not-link" href="">{{ notification.sender }}</a>
+                                         has accepted your demand to submission for
+                                        <a class="not-link" href="{% url 'conference' notification.conference.pk %}">{{ notification.conference }}</a>
+                                    </div>
+                                    <div class="col-1">
+                                        <a class="delete" href="{% url 'notification_delete' notification.pk %}" ><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
                             {% elif notification.type == 3 %}
-                                <i class="fas fa-user"></i> {{ notification.sender }} has refused your demand to submission for {{ notification.conference }} <a href="{% url 'notification_delete' notification.pk %}" ><i class="fas fa-trash-alt" id="delete"></i></a>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <a class="not-link" href="">{{ notification.sender }}</a>
+                                         has refused your demand to submission for
+                                        <a class="not-link" href="{% url 'conference' notification.conference.pk %}">{{ notification.conference }}</a>
+                                    </div>
+                                    <div class="col-1">
+                                        <a class="delete" href="{% url 'notification_delete' notification.pk %}" ><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
                             {% endif %}
                             <hr>
                         </h5>
                     {% endfor %}
-                </div>
+                {% else %}
+                    <h2 style="text-align: center">There is no notifications now</h2>
+                {% endif %}
             </div>
         </div>
     </div>
-<!--
-if no notification 
-<h5 style="color:#5F5FB0;" > no notifications now  </h5>
-!-->
+</div>
 {% endblock %}

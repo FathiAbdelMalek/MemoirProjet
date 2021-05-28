@@ -1,22 +1,14 @@
-* {
-    font-family: sans-serif;
-}
-
 #container{
-    background-color: #ccfff5;
-    margin: auto;
-    margin-top: 20px;
+    background-color: #2980b9c0;
+    width: 80%;
+    margin: 20px auto auto auto;
+    /*padding: 20px;*/
     border-radius: 50px;
-}
-
-#container:hover{
-    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+    color: white;
 }
 
 .submission {
-    background-color: #AEE4E8;
+    background-color: #8e44adc0;
     border-radius: 30px;
     width: 60%;
     margin: auto;
@@ -25,7 +17,7 @@
 .submission-text {
     text-align: center;
     font-weight: bold;
-    color: #ff8000;
+    color: white;
     display: block;
 }
 
@@ -39,7 +31,7 @@ a.btn {
     border-radius: 25px;
     outline: none;
     color: white;  
-  transition: 0.20s;
+    transition: 0.20s;
     cursor: pointer;
     transition: 0.25s;
     font-family: cursive;
@@ -48,7 +40,7 @@ a.btn {
 a.btn:hover{
     color: white;
     font-weight: bold;
-    background:   #ffa64d !important;
+    background:   #ff8000 !important;
      transform: scale(1.1);
 }
 #conference{
@@ -56,11 +48,8 @@ a.btn:hover{
     color:  #ff8000;
     
 }
-#date{
-    font-family: fantasy;
-    color: #5F5FB0;
-}
-#org{
+
+.org{
     font-family: monospace;
-    color: #5F5FB0;
+    color: white;
 }

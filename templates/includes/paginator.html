@@ -1,32 +1,31 @@
-<div class="paginator" aria-label="...">
-    <ul class="pagination">
-        {% if page_obj.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+{% load conference_extras %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="{% get_url 'page' 1 request.GET.urlencode %}"><i class="fas fa-angle-double-left"></i></a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{% get_url 'page' page_obj.previous_page_number request.GET.urlencode %}">Previous</a>
+        </li>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <li class="page-item active">
+                <span class="page-link">
+                    {{ num }}
+                    <span class="sr-only">(current)</span>
+                </span>
             </li>
-            <li class="page-item">
-                <span class="page-link"><a class="disabled" href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
-            </li>
+        {% elif num > page_obj.number|add:'-5' and num < page_obj.number|add:'5' %}
+            <li class="page-item"><a class="page-link" href="{% get_url 'page' num request.GET.urlencode %}">{{ num }}</a></li>
         {% endif %}
-        {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-                <li class="page-item active">
-                    <span class="page-link">
-                        {{ num }}
-                        <span class="sr-only">(current)</span>
-                    </span>
-                </li>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-            {% endif %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
-            </li>
-        {% endif %}
-    </ul>
-</div>
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{% get_url 'page' page_obj.next_page_number request.GET.urlencode %}">Next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{% get_url 'page' page_obj.paginator.num_pages request.GET.urlencode %}"><i class="fas fa-angle-double-right"></i></a>
+        </li>
+    {% endif %}
+</ul>

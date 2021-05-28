@@ -1,4 +1,15 @@
-.paginator {
+.pagination {
     margin: auto;
-    width: 20%;
+    width: 50%;
+    max-width: 607px;
+}
+
+.page-link {
+    background-color: #ff8000;
+    color: white;
+}
+
+.page-item.active .page-link {
+    background-color: #2980b9;
+    border-color: #2980b9;
 }

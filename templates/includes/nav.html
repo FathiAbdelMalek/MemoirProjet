@@ -26,21 +26,21 @@
                         <i class="far fa-plus-square"></i> Create Conference
                     </a>
                 </li>
-                <div class="dropdown" >
-                    <li class="nav-item " >
+                <div class="dropdown">
+                    <li class="nav-item">
                         <a href="#" class=" nav-link  dropdown-toggle"
                            role="button" id="dropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             {{user.username}}
                         </a>
-                        <ul class="navbar-nav ml-auto " >
+                        <ul class="navbar-nav ml-auto">
                             <div class ="dropdown-menu dropdown-menu-right">
-                                <li class="nav-item " >
-                                    <a href="{% url 'profile' user.pk %}" class=" nav-link dropdown-item"   >
+                                <li class="nav-item">
+                                    <a href="{% url 'profile' user.pk %}" class="nav-link dropdown-item"   >
                                         <i class="fas fa-user-circle"></i> Profile
                                     </a>
                                 </li>
-                                <li class="nav-item "  >
+                                <li class="nav-item">
                                     <a href="{% url 'password_change' %}" class=" nav-link dropdown-item "  >
                                         <i class="fas fa-lock"></i> Change Password
                                     </a>

@@ -3,58 +3,87 @@
 {% block title %} Profile {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-8 mt-5 pt-5">
-            <div class="row z-depth-3">
-                <div class="col-sm-4 bg-info rounded-left">
-                    <div class="card-block text-center text-white">
-                        {% if profile.image %}
-                        {% else %}
-                            <i class="fas fa-user-tie fa-7x mt-5"></i>
+<div class="row d-flex justify-content-center">
+    <div class="col-md-8 mt-4">
+        <div class="row z-depth-3">
+            <div class="col-sm-4 rounded-left pro">
+                <div class="card-block text-center text-white">
+                    {% if profile.image %}
+                        <img src="{{ profile.image.url }}" alt="user profile image">
+                    {% else %}
+                        <i class="fas fa-user-tie fa-7x mt-5"></i>
+                    {% endif %}
+                    <h2 class="font-weight-bold mt-4">{{ user.username }}</h2>
+                    <a href="{% url 'profile_update' user.pk %}" id="hedit"><i class="far fa-edit fa-2x mb-4" id="edit"></i>edit</a>
+                </div>
+            </div>
+            <div class="col-sm-8 bg- rounded-right" id="myprofi">
+                <div class="row mt-3">
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">First name</h4>
+                        <p>{{ user.first_name }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">Last name</h4>
+                        <p>{{ user.last_name }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">Birthday</h4>
+                        <p>{{ profile.birth_date }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">Country</h4>
+                        <p>{{ profile.country }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">Degree</h4>
+                        <p>{{ profile.degree }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">Speciality</h4>
+                        <p>{{ profile.speciality }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">Work place</h4>
+                        <p>{{ profile.work_place }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class="font-weight-blold">Web site</h4>
+                        <p>{{ profile.web_site }}</p>
+                    </div>
+                </div>
+                <h3 class="mt-3" id="personal">My Conferences</h3>
+                {% for conference in conferences %}
+                    <div class="row">
+                        <div class="col">
+                            <a style="color: white; text-decoration: underline" href="{% url 'conference' conference.pk %}">{{ conference.title }}</a>
+                        </div>
+                        <div class="col">
+                            <p>{{ conference.date }}</p>
+                        </div>
+                        <div class="col">
+                            <a style="color: #3f3" href="{% url 'conference_update' conference.pk %}">Update</a>
+                            <a style="color: #f33" href="{% url 'conference_delete' conference.pk %}">Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                <h3 class="mt-3" id="personal">My Submissions</h3>
+                {% for submission in submissions %}
+                    <div class="row">
+                        <div class="col">
+                            <a style="color: white; text-decoration: underline" href="{% url 'conference' submission.conference.pk %}">{{ submission.conference.title }}</a>
+                        </div>
+                        <div class="col">
+                            <p>{{ submission.conference.date }}</p>
+                        </div>
+                        {% if submission.conference.can_submit %}
+                            <div class="col">
+                                <a style="color: #3f3" href="{% url 'submission_update' submission.pk %}">Update</a>
+                                <a style="color: #f33" href="{% url 'submission_delete' submission.pk %}">Delete</a>
+                            </div>
                         {% endif %}
-                        <h2 class="font-weight-bold mt-4">{{ user.username }}</h2>
-                        <a href="{% url 'profile_update' user.pk %}" id="hedit"><i class="far fa-edit fa-2x mb-4" id="edit"></i>edit</a>
                     </div>
-                </div>
-                <div class="col-sm-8 bg- rounded-right" id="myprofi">
-                    <h3 class="mt3 text-center" id="personal">Personal Information</h3>
-                    <hr class="badge-primary mt-0 w-25">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h4 class="font-weight-blold">Email</h4>
-                            <p>{{ user.email }}</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <h4 class="font-weight-blold">first-name</h4>
-                            <p>{{ user.first_name }}</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <h4 class="font-weight-blold">last-name</h4>
-                            <p>{{ user.last_name }}</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <h4 class="font-weight-blold">birthday</h4>
-                            <p>{{ profile.birth_date }}</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <h4 class="font-weight-blold">sexe</h4>
-                            <p>{{ profile.sexe }}</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <h4 class="font-weight-blold">Country</h4>
-                            <p>{{ profile.country }}</p>
-                        </div>
-                    </div>
-                    <h3 class="mt-3" id="personal">Projects</h3>
-                    <hr class="bg-primary">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h4 class="font-weight-blold">my conferences</h4>
-                            <p>conferences</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -1,76 +1,75 @@
-
-#table{
+#table {
     width: 50%;
     margin-top: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    color: white;
     text-align: center;
-    
-    
 }
-#table:hover{
-             
-        box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-  
+
+#table:hover {
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
 }
+
 th {
-    background-color: #0099cc;
+    background-color: #2980b9;
     color: white;
     font-weight: bold;
-    
-    
 }
 
-
-tr:last-of-type {
-  border-bottom: 3px solid #0099cc;
-}
 td{
-    
     font-weight: bold;
+    color: white;
+    background-color: #8e44ad;
 }
+
 td:hover{
     color: white;
     font-weight: bold;
-    background: #0099cc;
+    background: #2980b9;
 }
+
 tr:hover {
-    background:#0099cc;
+    background:#2980b9;
     color: white;
-      font-weight: bold;
+    font-weight: bold;
 }
+
 #users{
     width: 53%;
-     text-align: center;
+    text-align: center;
 }
+
 #users:hover{
-     box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
- 
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
 }
+
 .btn.btn1{
-    background:  #ff4d4d;
-    border: 2px solid #ff4d4d ;
+    background:  #f33;
+    border: 2px solid #f33;
 }
+
 .btn.btn1:hover{
     background-color: #ff4d4d !important;
     font-weight: bold;
 }
+
 .btn.btn0{
-    background: #009878;
-     border: 2px solid #009878 ;
+    background: #3f3;
+    border: 2px solid #3f3 ;
 }
+
 .btn.btn0:hover{
-    background-color: #009878 !important;
+    background-color: #3f3 !important;
     font-weight: bold;
 }
+
 .descreption{
     text-align: center;
     font-weight: bold;
     font-family: cursive;
-    color:  #ffa64d;
-    
+    color:  #ff8000;
 }
-

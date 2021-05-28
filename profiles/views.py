@@ -18,8 +18,7 @@ class ProfileView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         context['conferences'] = Conference.objects.filter(organizer=self.request.user)
-        context['submissions'] = Submission.objects.all()
-        context['self_submissions'] = Submission.objects.filter(user=self.request.user)
+        context['submissions'] = Submission.objects.filter(user=self.request.user)
         return context
 
 
@@ -31,9 +30,5 @@ class ProfileUpdateView(generic.UpdateView):
     context_object_name = 'profile'
 
     def form_valid(self, form):
-        user = User.objects.get(pk=form.user.pk)
-        user.first_name = form.first_name
-        user.last_name = form.last_name
-        user.save()
         form.save()
         return redirect('profile', form.user.pk)

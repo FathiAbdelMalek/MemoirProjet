@@ -1,15 +1,23 @@
-.notf{
+.notf {
     text-align: center;
-    color: #ffa64d;
+    color: #ff8000;
     font-weight: bold;
-    
+    font-family: Serif;
 }
-.demand{
-    font-family: sans-serif;
-    color: #5F5FB0;
+
+.demand {
+    font-family: serif;
     font-weight: bold;
+    color: white !important;
 }
-#delete{
+
+.delete {
     color:  #ff3333;
-    
+    float: right;
+    position: fixed;
+}
+
+.not-link {
+    color: #ff8000;
+    font-family: Serif;
 }

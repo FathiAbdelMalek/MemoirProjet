@@ -2,10 +2,22 @@ from django import forms
 from .models import Profile
 
 
+class DateInput(forms.DateTimeInput):
+    input_type = 'date'
+
+
 class ProfileUpdateForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=20, label='First name', widget=forms.TextInput)
-    last_name = forms.CharField(max_length=20, label='Last name', widget=forms.TextInput)
 
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'birth_date', 'sexe', 'country', 'work_place', 'degree', 'speciality', 'web_site']
+        fields = ['image', 'birth_date', 'sexe', 'country', 'work_place', 'degree', 'speciality', 'web_site']
+
+        widgets = {
+            'birth_date': forms.DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                }
+            ),
+        }

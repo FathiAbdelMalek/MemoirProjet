@@ -34,24 +34,25 @@
             <td>{{ conference.place }}</td>
         </tr>
     </table>
-    <div class="card mb-3" style="max-width: 540px;" id="container">
+    <div class="card mb-3" id="container">
         <div class="row no-gutters">
             <div class="col-md-12">
                 <div class="card-body text-center">
-                    <h2 class="descreption" > Description </h2>
-                    <pre>{{ conference.description }}</pre>
+                    <h2 class="descreption"> Description</h2>
+                    <pre style="color: white">{{ conference.description }}</pre>
                     {% if conference.organizer != request.user %}
                         {% if conference.can_submit %}
                             <a href="{% url 'submission_create' conference.pk %}" class="btn btn">Submit</a>
                         {% endif %}
                     {% else %}
                         <a href="{% url 'conference_update' conference.pk %}" class="btn btn">Update</a>
+                        <a href="{% url 'conference_delete' conference.pk %}" class="btn btn">Delete</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    {% if request.user == conference.organizer %}
+    {% if request.user == conference.organizer and submission_list %}
         <table class="table table-bordered"  align="center" id="users"  >
             <tr>
                 <th>username</th>
@@ -67,7 +68,7 @@
                     <td>{{ submission.abstract }}</td>
                     <td>
                         {% if submission.article %}
-                            <a href="{{ submission.article.url }}" download="{{ submission.article.url }}">Download</a>
+                            <a style="color:white; text-decoration: underline" href="{{ submission.article.url }}" download="{{ submission.article.url }}">Download {{ submission.article }}</a>
                         {% else %}
                             None Article
                         {% endif %}

@@ -1,0 +1,35 @@
+input {
+    height: 30px;
+    width: 200px;
+    background-color: #ffffffa0 !important;
+    color: #000 !important;
+    border: #2980b9;
+    border-radius: 5px;
+}
+
+input:focus {
+    border: 3px;
+}
+
+textarea {
+    background-color: #ffffffa0 !important;
+    color: #000 !important;
+}
+
+select {
+    background-color: #ffffffa0 !important;
+    color: #000 !important;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+select option {
+    background-color: #ffffff50 !important;
+    color: #000 !important;
+    font-size: 1.25em;
+}
+
+.card-footer a {
+    color: white;
+}

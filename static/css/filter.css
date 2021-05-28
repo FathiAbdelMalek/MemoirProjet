@@ -1,0 +1,18 @@
+.filter {
+    padding: 10px;
+    text-align: center;
+    background-color: #2980b9;
+    color: white;
+    font-weight: bold;
+    word-spacing: 10px;
+    margin-bottom: 15px;
+}
+
+form.search button {
+    background:#ffa64d;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}

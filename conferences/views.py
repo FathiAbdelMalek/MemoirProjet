@@ -6,7 +6,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.core.mail import send_mail
@@ -19,16 +18,20 @@ from .filters import ConferenceFilter
 
 class IndexView(generic.ListView):
     model = Conference
-    # paginate_by = 2
+    # paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         conferences = Conference.objects.all()
         filter = ConferenceFilter(self.request.GET, queryset=conferences)
         conferences = filter.qs
+        pg = Paginator(conferences, 5)
+        page_number = self.request.GET.get('page')
+        page_obj = pg.get_page(page_number)
         context['object_list'] = conferences
         context['submission_list'] = Submission.objects.all()
         context['filter'] = filter
+        context['page_obj'] = page_obj
         return context
 
 

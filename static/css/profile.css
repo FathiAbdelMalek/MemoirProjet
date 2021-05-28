@@ -1,31 +1,44 @@
-#myprofi{
-    background-color:  #ccf5ff;
-    
+#myprofi {
+    background-color:  #2980b9c0;
 }
-#personal{
-    font-weight: bold;
-    color:  #ffa64d;
-    font-family: cursive;
-    
-}
-div h4{
-    color:  #5F5FB0;
-    font-weight: bold;
-    font-family: sans-serif;
-}
-#myprofi:hover{
-    
-             
-        box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
-box-shadow: -4px 9px 56px 0px rgba(0,0,0,0.75);
 
+#personal {
+    font-weight: bold;
+    color:  #ff8000;
+    font-family: serif;
 }
+
+div h2, h4, p {
+    font-family: Serif;
+}
+
+div h4 {
+    color:  #ff8000;
+    font-weight: bold;
+}
+
+div p {
+    color: white;
+}
+
 #edit{
     color: white;
 }
+
 #hedit{
     color: white;
-    text-decoration: none;
     font-weight: bold;
+    font-family: cursive;
+}
+
+.pro {
+    background-color: #2980b9f4;
+    padding: 15px;
+}
+
+.pro img {
+    width: 200px;
+    height: 200px;
+    border: solid 1px #2980b9;
+    border-radius: 100px;
 }

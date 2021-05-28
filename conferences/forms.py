@@ -2,10 +2,6 @@ from django import forms
 from .models import Conference, Submission
 
 
-class DateInput(forms.DateTimeInput):
-    input_type = 'datetime-local'
-
-
 class ConferenceCreationForm(forms.ModelForm):
 
     date = forms.DateField(label='Conference Date', widget=forms.SelectDateWidget)
