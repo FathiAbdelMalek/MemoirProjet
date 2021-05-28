@@ -1,1 +1,1 @@
-web: gunicorn MemoirProjet.wsgi --log-file
+web: gunicorn MemoirProjet.wsgi --log-file -
