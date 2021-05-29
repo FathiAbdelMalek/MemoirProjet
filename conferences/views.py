@@ -90,12 +90,12 @@ class SubmissionCreationView(generic.CreateView):
         message = str(submission.user)
         message += " has submission to submit in your conference "
         message += str(submission.conference.title)
-        # send_mail(
-        #     'a submission for conference',
-        #     message,
-        #     'abdelmalek.fathi.2001@gmail.com',
-        #     [submission.conference.organizer.email]
-        # )
+        send_mail(
+            'a submission for conference',
+            message,
+            'abdelmalek.fathi.2001@gmail.com',
+            [submission.conference.organizer.email]
+        )
         return redirect(self.request.session['page'])
 
 
