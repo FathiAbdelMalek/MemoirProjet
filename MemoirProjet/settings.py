@@ -89,14 +89,25 @@ WSGI_APPLICATION = 'MemoirProjet.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd58r8i6eua7ig',
+        'HOST': 'ec2-35-170-85-206.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'lkcobspmyisldn',
+        'PASSWORD': '7a80b00f4024c4e09dbaaef81e57038dd0ea165469b69e0085a64b32dd9de570',
     }
 }
 
-import dj_database_url
-db = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# import dj_database_url
+# db = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
