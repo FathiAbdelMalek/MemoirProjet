@@ -12,6 +12,7 @@ django-filter = "*"
 gunicorn = "*"
 django-bootstrap-form = "*"
 whitenoise = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

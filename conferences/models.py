@@ -8,7 +8,7 @@ User = get_user_model()
 class Author(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    email = models.EmailField(verbose_name="email", max_length=254, unique=False)
+    email = models.EmailField(verbose_name="email", max_length=254)
 
     def __str__(self):
         return self.last_name + " " + self.first_name
@@ -21,10 +21,10 @@ class Conference(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     date = models.DateTimeField()
     submission_deadline = models.DateField()
-    confirmation_deadline = models.DateField(null=True, blank=True)
-    payment_deadline = models.DateField(null=True, blank=True)
-    price = models.CharField(max_length=20, null=True, blank=True)
-    # post_price = models.CharField(max_length=20, null=True, blank=True)
+    confirmation_deadline = models.DateField()
+    payment_deadline = models.DateField()
+    pre_price = models.CharField(max_length=20, null=True, blank=True)
+    post_price = models.CharField(max_length=20, null=True, blank=True)
     organizer = models.ForeignKey(User, on_delete=models.RESTRICT)
 
     def __str__(self):
@@ -35,12 +35,12 @@ class Conference(models.Model):
             return False
         return True
 
-    def can_confirm(self):
+    def can_accept(self):
         if timezone.now().date() <= self.submission_deadline or timezone.now().date() > self.confirmation_deadline:
             return False
         return True
 
-    def can_pay(self):
+    def can_confirm(self):
         if timezone.now().date() <= self.payment_deadline or timezone.now().date() > self.confirmation_deadline:
             return False
         return True
@@ -59,12 +59,16 @@ class Submission(models.Model):
     email = models.EmailField(verbose_name="email", max_length=254, unique=False)
     article_name = models.CharField(max_length=100)
     abstract = models.TextField(verbose_name='abstract')
-    article = models.FileField(null=True, blank=True, upload_to='files')
-    authors = models.ManyToManyField(Author, related_name='article_authors', null=True, blank=True)
+    article = models.FileField(upload_to='files', null=True, blank=True)
+    authors = models.ManyToManyField(Author, related_name='article_authors')
     status = models.IntegerField(choices=STATUS, default=0)
     demand_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE)
+
+    def auto_refused(self):
+        if timezone.now().date() > self.conference.submission_deadline:
+            self.status = 2
 
     def __str__(self):
         return str(self.user) + " submission in " + str(self.conference)

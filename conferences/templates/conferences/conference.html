@@ -74,8 +74,20 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0 {% if not conference.can_confirm %}disabled{% endif %}"> Accept </a>
-                        <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1 {% if not conference.can_confirm %}disabled{% endif %}"> Refuse </a>
+                        {% if conference.can_submit %}
+                            <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0 disabled">Accept</a>
+                            <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1 disabled">Refuse</a>
+                        {% elif conference.can_accept %}
+                            <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0">Accept</a>
+                            <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1">Refuse</a>
+                        {% elif conference.can_confirm %}
+                            <a href="{% url 'submission_confirmed' submission.pk %}" class="btn btn0">Confirm</a>
+                            <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1">Refuse</a>
+                        {% elif submission.status == 3 %}
+                            <p class="btn btn0 disabled">Confirmed</p>
+                        {% elif submission.status == 2 %}
+                            <p class="btn btn1 disabled">Refused</p>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

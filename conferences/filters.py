@@ -10,9 +10,3 @@ class ConferenceFilter(django_filters.FilterSet):
     class Meta:
         model = Conference
         fields = ['title', 'place', 'date', 'organizer']
-        # fields = {
-        #     'title': 'icontains',
-        #     'place': '',
-        #     'date': '',
-        #     'organizer': '',
-        # }
