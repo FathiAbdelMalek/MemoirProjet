@@ -11,7 +11,8 @@ class ConferenceCreationForm(forms.ModelForm):
 
     class Meta:
         model = Conference
-        fields = ['title', 'description', 'date', 'submission_deadline', 'confirmation_deadline', 'payment_deadline', 'price', 'place']
+        fields = ['title', 'description', 'date', 'submission_deadline', 'confirmation_deadline', 'payment_deadline',
+                  'pre_price', 'place']
 
 
 class ConferenceUpdateForm(forms.ModelForm):
@@ -23,7 +24,8 @@ class ConferenceUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Conference
-        fields = ['title', 'description', 'date', 'submission_deadline', 'confirmation_deadline', 'payment_deadline', 'price', 'place']
+        fields = ['title', 'description', 'date', 'submission_deadline', 'confirmation_deadline', 'payment_deadline',
+                  'pre_price', 'place']
 
 
 class SubmissionCreationForm(forms.ModelForm):

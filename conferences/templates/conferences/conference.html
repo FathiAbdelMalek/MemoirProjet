@@ -4,6 +4,9 @@
 {% block title %}{{ conference.title }}{% endblock %}
 
 {% block content %}
+    {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
     <table class="table table-bordered" id="table" align="center">
         <tr>
             <th>Title</th>
@@ -27,7 +30,7 @@
         </tr>
         <tr>
             <th>price</th>
-            <td>{{ conference.price }}</td>
+            <td>{{ conference.pre_price }}</td>
         </tr>
         <tr>
             <th>place</th>

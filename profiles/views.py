@@ -19,6 +19,7 @@ class ProfileView(generic.DetailView):
         context['user'] = self.request.user
         context['conferences'] = Conference.objects.filter(organizer=self.request.user)
         context['submissions'] = Submission.objects.filter(user=self.request.user)
+        self.request.session['page'] = self.request.path
         return context
 
 

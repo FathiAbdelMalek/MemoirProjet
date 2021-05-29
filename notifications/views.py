@@ -7,6 +7,7 @@ from notifications.models import Notification
 @login_required()
 def show_notifications(request):
     notifications = Notification.objects.filter(receiver=request.user).order_by('-date')
+    request.session['page'] = request.path
     context = {
         'notifications': notifications
     }

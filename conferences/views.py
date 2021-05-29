@@ -25,13 +25,10 @@ class IndexView(generic.ListView):
         conferences = Conference.objects.all()
         filter = ConferenceFilter(self.request.GET, queryset=conferences)
         conferences = filter.qs
-        # pg = Paginator(conferences, 5)
-        # page_number = self.request.GET.get('page')
-        # page_obj = pg.get_page(page_number)
         context['object_list'] = conferences
         context['submission_list'] = Submission.objects.all()
         context['filter'] = filter
-        # context['page_obj'] = page_obj
+        self.request.session['page'] = self.request.path
         return context
 
 
@@ -42,6 +39,7 @@ class ConferenceView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['submission_list'] = Submission.objects.filter(conference=self.kwargs['pk'])
+        self.request.session['page'] = self.request.path
         return context
 
 
@@ -55,7 +53,7 @@ class ConferenceCreationView(generic.CreateView):
         conference.organizer = self.request.user
         conference.save()
         messages.success(self.request, "Conference created successfully")
-        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
+        return redirect('home')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -67,14 +65,14 @@ class ConferenceUpdateView(generic.UpdateView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, "Conference updated successfully")
-        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
+        return redirect(self.request.session['page'])
 
 
 @login_required()
 def delete_conference(request, pk):
     Conference.objects.filter(id=pk).delete()
     messages.success(request, "Conference deleted successfully")
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.session['page'])
 
 
 @method_decorator(login_required, name='dispatch')
@@ -92,13 +90,13 @@ class SubmissionCreationView(generic.CreateView):
         message = str(submission.user)
         message += " has submission to submit in your conference "
         message += str(submission.conference.title)
-        send_mail(
-            'a submission for conference',
-            message,
-            'abdelmalek.fathi.2001@gmail.com',
-            [submission.conference.organizer.email]
-        )
-        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
+        # send_mail(
+        #     'a submission for conference',
+        #     message,
+        #     'abdelmalek.fathi.2001@gmail.com',
+        #     [submission.conference.organizer.email]
+        # )
+        return redirect(self.request.session['page'])
 
 
 @method_decorator(login_required, name='dispatch')
@@ -110,14 +108,14 @@ class SubmissionUpdateView(generic.UpdateView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, "Submission updated successfully")
-        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
+        return redirect(self.request.session['page'])
 
 
 @login_required()
 def delete_submission(request, pk):
     Submission.objects.filter(id=pk).delete()
     messages.success(request, "Submission deleted successfully")
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.session['page'])
 
 
 @login_required()
@@ -135,7 +133,7 @@ def accept_submission(request, pk):
         [submission.conference.organizer.email]
     )
     messages.success(request, 'The submission has ben accepted successfully')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.session['page'])
 
 
 @login_required()
@@ -153,7 +151,7 @@ def refuse_submission(request, pk):
         [submission.conference.organizer.email]
     )
     messages.success(request, 'The submission has ben refused successfully')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.session['page'])
 
 
 @login_required()
@@ -171,7 +169,7 @@ def confirm_submission(request, pk):
         [submission.conference.organizer.email]
     )
     messages.success(request, 'The submission has ben confirmed successfully')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.session['page'])
 
 
 def download(request, path):
