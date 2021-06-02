@@ -17,7 +17,7 @@
                                         <i class="fas fa-user"></i>
                                     </div>
                                     <div class="col-10">
-                                        <a class="not-link" href="">{{ notification.sender }}</a>
+                                        <a class="not-link" href="{% url 'public_profile' notification.sender.username %}">{{ notification.sender }}</a>
                                          has demand a submission for your conference
                                         <a class="not-link" href="{% url 'conference' notification.conference.pk %}">{{ notification.conference }}</a>
                                     </div>
@@ -47,6 +47,20 @@
                                     <div class="col-10">
                                         <a class="not-link" href="">{{ notification.sender }}</a>
                                          has refused your demand to submission for
+                                        <a class="not-link" href="{% url 'conference' notification.conference.pk %}">{{ notification.conference }}</a>
+                                    </div>
+                                    <div class="col-1">
+                                        <a class="delete" href="{% url 'notification_delete' notification.pk %}" ><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            {% elif notification.type == 4 %}
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <a class="not-link" href="">{{ notification.sender }}</a>
+                                         has confirmed your demand to submission for
                                         <a class="not-link" href="{% url 'conference' notification.conference.pk %}">{{ notification.conference }}</a>
                                     </div>
                                     <div class="col-1">

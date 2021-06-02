@@ -16,7 +16,6 @@ class ProfileUpdateForm(forms.ModelForm):
             'birth_date': forms.DateInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Select a date',
                     'type': 'date'
                 }
             ),

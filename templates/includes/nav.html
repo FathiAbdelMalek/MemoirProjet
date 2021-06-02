@@ -2,7 +2,7 @@
     <a href="{% url 'home' %}"id="home">Conference</a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="color: white">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -12,7 +12,7 @@
                     <i class="fa fa-home"></i> Home
                 </a>
             </li>
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
                 <li class="nav-item " >
                     <a href="{% url 'notifications' %}" class="nav-link "  >
                         <i class="fas fa-bell"></i> Notifications
@@ -31,12 +31,12 @@
                         <a href="#" class=" nav-link  dropdown-toggle"
                            role="button" id="dropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                            {{user.username}}
+                            {{request.user.username}}
                         </a>
                         <ul class="navbar-nav ml-auto">
                             <div class ="dropdown-menu dropdown-menu-right">
                                 <li class="nav-item">
-                                    <a href="{% url 'profile' user.pk %}" class="nav-link dropdown-item"   >
+                                    <a href="{% url 'profile' request.user.username %}" class="nav-link dropdown-item"   >
                                         <i class="fas fa-user-circle"></i> Profile
                                     </a>
                                 </li>

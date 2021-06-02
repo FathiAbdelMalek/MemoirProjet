@@ -31,15 +31,15 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
+    'conferences.apps.ElconferenceAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    # 'conferences.apps.ConferencesConfig',
-    'conferences',
+    'conferences.apps.ConferencesConfig',
     'accounts.apps.AccountsConfig',
     'profiles.apps.ProfilesConfig',
     'notifications.apps.NotificationsConfig',

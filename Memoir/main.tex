@@ -1,8 +1,10 @@
 \documentclass[12pt,a4paper]{article} 
-\author{Abdelmalek Fathi, Maamar Choukri\\
+\author{
 Laarbi Tebessi Tebessa University\\
-Math and Computer Science Departement}
-\title{Build a web site for representing international conferences}
+Math and Computer Science Departement\\
+Abdelmalek Fathi, Maamar Choukri\\
+Under supervision of Tarek Nouioua}
+\title{Build a web site for representing international conferences and submission on them}
 \date{}
 \usepackage[left=12mm, top=1in, bottom=1.5in]{geometry}
 \usepackage{graphicx}
@@ -10,6 +12,7 @@ Math and Computer Science Departement}
 \renewcommand*\contentsname{Table of Contents}
 
 \begin{document}
+%	\includegraphics[width=3cm]{univ-tebessa.jpg}
 	\maketitle
 	\clearpage
 	\listoffigures
@@ -17,6 +20,7 @@ Math and Computer Science Departement}
 	\clearpage
 	\tableofcontents
 	\clearpage
+	
 	\section{Introduction}
 	\paragraph{}
 	National and international scientific conferences are an important event for universities and researchers from different parts of the world, so it is necessary to facilitate the process of publishing and accessing these conferences.
@@ -30,7 +34,7 @@ Math and Computer Science Departement}
 	\end{itemize}
 	\subsection{Hypotheses}
 	\paragraph{}
-	Among the proposed solutions, we find that one of them relies on creating a website for publishing conferences and requesting registration in them, where the person in charge of the conference (university or organization) publishes the necessary information about the conference such as its name, date, and participation price, if any, while any researcher or student can Knowing the request to participate in it, as he sends his research to the officials in charge of the conference and is waiting for it to be accepted by them.
+	Among the proposed solutions, we find that one of them relies on creating a website for publishing conferences and requesting registration in them, where the person in charge of the conference (university or organization) publishes the necessary information about the conference such as its name, date, and participation price... while any researcher or student can request to participate in it, as he sends his research to the officials in charge of the conference and is waiting for it to be accepted by them.
 	\subsection{Article structure}
 	\paragraph{}
 	This article contains the following chapters:
@@ -46,17 +50,26 @@ Math and Computer Science Departement}
 		Chapter to view  the technologies that we used in making the site, and the implementation of our site (pictures from the website itself).
 		
 	\end{itemize}
+
 	\clearpage
 	\section{Presentation of the project frameworks}
+		\subsection{What}
+		\paragraph{}
+		\subsection{Why ?}
+		\paragraph{}
+		The main problem is that there is no website to represent a conference and let scholars submit in it at the same time, so the conference is in a separated website like ieee.org or in a specific domain like icrami.faox.dk. Meanwhile the scholar publish his paper in another website like easychair.org.
+		\paragraph{}
+		Another problem is that Algeria haven't any platform to let it's universities publish their conferences on it.
+		\subsection{How ?}
 	
 	\clearpage
 	\section{Analysis and design (UML)}
 	We have utilized the following graphs: class, use cases and sequence diagram of each process in our website.
 	
 	\subsection{Class Diagram}
-	a diagram to introduce classes of the project and their associations with each others.
+	In Figure \ref{fig:class-d} we diagram to introduce classes of the project and their associations with each others.
 	
-		\begin{figure}[!h]
+		\begin{figure}[b]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/class.png}
 			\caption{class diagram}
@@ -64,9 +77,9 @@ Math and Computer Science Departement}
 		\end{figure}
 
 	\subsection{Use case Diagram}
-	a diagram to introduce what can every actor do in this project.
+	In Figure \ref{fig:use-case-d} we diagram to introduce what can every actor do in this project.
 	
-		\begin{figure}[!h]
+		\begin{figure}[b]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/use_case.png}
 			\caption{use case diagram}
@@ -75,79 +88,144 @@ Math and Computer Science Departement}
 
 	\subsection{Sequence Diagrams}
 	diagrams to figure out how each process is working behind the scene.
-		\subsubsection{For add user}
-		how to add new user
-		
-			\begin{figure}[!h]
-				\centering
-				\includegraphics[width=\textwidth]{diagrams/add_user_sequence.png}
-				\caption{add user sequence diagram}
-				\label{fig:add-user-s-d}
-			\end{figure}
-		
-		\subsubsection{For update user}
-		how to update user information
-		
-			\begin{figure}[!h]
-				\centering
-				\includegraphics[width=\textwidth]{diagrams/update_user_sequence.png}
-				\caption{update user sequence diagram}
-				\label{fig:update-user-s-d}
-			\end{figure}
-		
-		\subsubsection{For delete user}
-		how to delete a user from the data base
-		
-			\begin{figure}[!h]
-				\centering
-				\includegraphics[width=\textwidth]{diagrams/delete_user_sequence.png}
-				\caption{delete sequence diagram}
-				\label{fig:delete-user-s-d}
-			\end{figure}
-		
-		\subsubsection{For register}
-		how to register as a new user
-		
-			\begin{figure}[!h]
-				\centering
-				\includegraphics[width=\textwidth]{diagrams/register_sequence.png}
-				\caption{register sequence diagram}
-				\label{fig:register-s-d}
-			\end{figure}
-		
+	
+	
 		\subsubsection{For login}
-		how the user can login
+		In Figure \ref{fig:login-s-d} we have how the user can login
 		
-			\begin{figure}[!h]
+			\begin{figure}[b]
 				\centering
 				\includegraphics[width=\textwidth]{diagrams/login_sequence.png}
 				\caption{login sequence diagram}
 				\label{fig:login-s-d}
 			\end{figure}
+		
+		\subsubsection{For register}
+		In Figure \ref{fig:register-s-d} we have how to register as a new user
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/register_sequence.png}
+				\caption{register sequence diagram}
+				\label{fig:register-s-d}
+			\end{figure}
+	
+		\subsubsection{For create user}
+		In Figure \ref{fig:user-create-s-d} we have how to create new user
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/user_create_sequence.png}
+				\caption{create user sequence diagram}
+				\label{fig:user-create-s-d}
+			\end{figure}
+		
+		\subsubsection{For update user}
+		In Figure \ref{fig:user-update-s-d} we have how to update user information
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/user_update_sequence.png}
+				\caption{update user sequence diagram}
+				\label{fig:user-update-s-d}
+			\end{figure}
+		
+		\subsubsection{For delete user}
+		In Figure \ref{fig:user-delete-s-d} we have how to delete a user from the data base
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/user_delete_sequence.png}
+				\caption{delete sequence diagram}
+				\label{fig:user-delete-s-d}
+			\end{figure}
+		
+		\subsubsection{For create conference}
+		In Figure \ref{fig:conference-create-s-d} we have how to create new user
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/conference_create_sequence.png}
+				\caption{create user sequence diagram}
+				\label{fig:conference-create-s-d}
+			\end{figure}
+		
+		\subsubsection{For update conference}
+		In Figure \ref{fig:conference-update-s-d} we have how to update user information
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/conference_update_sequence.png}
+				\caption{update user sequence diagram}
+				\label{fig:conference-update-s-d}
+			\end{figure}
+		
+		\subsubsection{For delete conference}
+		In Figure \ref{fig:conference-delete-s-d} we have how to delete a user from the data base
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/conference_delete_sequence.png}
+				\caption{delete sequence diagram}
+				\label{fig:conference-delete-s-d}
+			\end{figure}
+		
+		\subsubsection{For create submission}
+		In Figure \ref{fig:submission-create-s-d} we have how to create new user
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/submission_create_sequence.png}
+				\caption{create user sequence diagram}
+				\label{fig:submission-create-s-d}
+			\end{figure}
+		
+		\subsubsection{For update submission}
+		In Figure \ref{fig:submission-update-s-d} we have how to update user information
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/submission_update_sequence.png}
+				\caption{update user sequence diagram}
+				\label{fig:submission-update-s-d}
+			\end{figure}
+		
+		\subsubsection{For delete submission}
+		In Figure \ref{fig:submission-delete-s-d} we have how to delete a user from the data base
+		
+			\begin{figure}[b]
+				\centering
+				\includegraphics[width=\textwidth]{diagrams/submission_delete_sequence.png}
+				\caption{delete sequence diagram}
+				\label{fig:submission-delete-s-d}
+			\end{figure}
 	
 	\clearpage
 	\section{The implementation}
 	\paragraph{}
-	There are many technologies that allow building web applications, and they are divided into two main parts, the front-end part such as HTML, CSS ..., and the back-end part such as PHP, NodeJS ..., in addition to databases, but we will depend in our project on the following:
+	There are many technologies that allow building web applications, and they are divided into two main parts, the front-end part such as HTML, CSS, JS ..., and the back-end part such as PHP, NodeJS ..., in addition to databases, but we will depend in our project on the following:
 	\subsection{Implementation Technologies}
 	\subsubsection{For front-end}
 	\paragraph{HTML}
 	HTML (Hyper-Text Markup Language) is the standard mark-up language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.\cite{HTML}
 	\paragraph{CSS}
 	Cascading Style Sheets (CSS) is a simple mechanism for adding style (e.g., fonts, colors, spacing) to Web documents.\cite{CSS}
+	\paragraph{Bootstrap}
+	 The world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.\cite{Bootstrap}
 	\subsection{For back-end}
-	\subsubsection{For back-end}
+	\subsubsection{Framework}
 	\paragraph{Django Web Framework}
 	Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of Web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.\cite{Django}
 	\paragraph{why django ?}
 	\begin{itemize}
 		\item It's a Python Language.
+		\item Easy to learn.
+		\item Fast and secured.
 		\item Built-in administration interface.
 		\item Framework able to customization.
 		\item large community.
 		\item MVC design pattern.
 		\item Built-in ORM for databases.
-		\item Secured.
 		\item and much more ...
 	\end{itemize}
 	\subsubsection{For databases}
@@ -166,6 +244,8 @@ Math and Computer Science Departement}
 		https://www.djangoproject.com/
 		\bibitem{PostgreSQL}
 		https://www.postgresql.org/
+		\bibitem{Bootstrap}
+		https://getbootstrap.com/
 	\end{thebibliography}
 	
 \end{document}

@@ -3,9 +3,8 @@ import os.path
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.core.mail import send_mail
@@ -18,16 +17,19 @@ from .filters import ConferenceFilter
 
 class IndexView(generic.ListView):
     model = Conference
-    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         conferences = Conference.objects.all()
         filter = ConferenceFilter(self.request.GET, queryset=conferences)
         conferences = filter.qs
+        paginator = Paginator(conferences, 5)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context['object_list'] = conferences
         context['submission_list'] = Submission.objects.all()
         context['filter'] = filter
+        context['page_obj'] = page_obj
         self.request.session['page'] = self.request.path
         return context
 
@@ -87,13 +89,14 @@ class SubmissionCreationView(generic.CreateView):
         submission.conference = Conference.objects.get(id=self.kwargs['conf_pk'])
         submission.save()
         messages.success(self.request, 'Your submission to subscribe has been created successfully')
-        message = str(submission.user)
-        message += " has submission to submit in your conference "
-        message += str(submission.conference.title)
+        message = " I'm "
+        message += str(submission.user)
+        message += " have submitted to join in your conference "
+        message += str(submission.conference)
         send_mail(
-            'a submission for conference',
+            'Submission for your Conference',
             message,
-            'abdelmalek.fathi.2001@gmail.com',
+            [submission.user.email],
             [submission.conference.organizer.email]
         )
         return redirect(self.request.session['page'])
@@ -123,14 +126,14 @@ def accept_submission(request, pk):
     submission = Submission.objects.get(id=pk)
     submission.status = 1
     submission.save()
-    message = str(submission.user)
-    message += " has accepted your submission to submit in "
-    message += str(submission.conference.title)
+    message = " We have seen and reviewed your submission in our conference "
+    message += str(submission.conference)
+    message += ", and we accepted it "
     send_mail(
-        'a submission for submission',
+        'Submission Accepted',
         message,
-        'abdelmalek.fathi.2001@gmail.com',
-        [submission.conference.organizer.email]
+        submission.conference.organizer.email,
+        [submission.user.email]
     )
     messages.success(request, 'The submission has ben accepted successfully')
     return redirect(request.session['page'])
@@ -141,14 +144,14 @@ def refuse_submission(request, pk):
     submission = Submission.objects.get(id=pk)
     submission.status = 2
     submission.save()
-    message = str(submission.user)
-    message += " has refused your submission to submit in "
-    message += str(submission.conference.title)
+    message = " We have seen and reviewed your submission in our conference "
+    message += str(submission.conference)
+    message += ", and we refused it "
     send_mail(
-        'a submission for submission',
+        'Submission Accepted',
         message,
-        'abdelmalek.fathi.2001@gmail.com',
-        [submission.conference.organizer.email]
+        submission.conference.organizer.email,
+        [submission.user.email]
     )
     messages.success(request, 'The submission has ben refused successfully')
     return redirect(request.session['page'])
@@ -159,14 +162,13 @@ def confirm_submission(request, pk):
     submission = Submission.objects.get(id=pk)
     submission.status = 3
     submission.save()
-    message = str(submission.user)
-    message += " has confirmed your submission to submit in "
-    message += str(submission.conference.title)
+    message = " Congrats, we have confirmed your submission in our conference "
+    message += str(submission.conference)
     send_mail(
-        'a submission for submission',
+        'Submission Confirmed',
         message,
-        'abdelmalek.fathi.2001@gmail.com',
-        [submission.conference.organizer.email]
+        submission.conference.organizer.email,
+        [submission.user.email]
     )
     messages.success(request, 'The submission has ben confirmed successfully')
     return redirect(request.session['page'])
@@ -184,7 +186,3 @@ def download(request, path):
 
 def error_404_handler(request, exception):
     return render('404.html')
-
-
-def error_500_handler(request):
-    return render('500.html')

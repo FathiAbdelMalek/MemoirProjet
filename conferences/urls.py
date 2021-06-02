@@ -28,4 +28,3 @@ urlpatterns = [
 ]
 
 handler404 = 'conferences.views.error_404_handler'
-handler500 = 'conferences.views.error_500_handler'

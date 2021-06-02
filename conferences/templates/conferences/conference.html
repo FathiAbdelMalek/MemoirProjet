@@ -29,8 +29,12 @@
             <td>{{ conference.payment_deadline }}</td>
         </tr>
         <tr>
-            <th>price</th>
+            <th>Price before deadline</th>
             <td>{{ conference.pre_price }}</td>
+        </tr>
+        <tr>
+            <th>Price after deadline</th>
+            <td>{{ conference.post_price }}</td>
         </tr>
         <tr>
             <th>place</th>
@@ -81,18 +85,50 @@
                             <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0 disabled">Accept</a>
                             <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1 disabled">Refuse</a>
                         {% elif conference.can_accept %}
-                            <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0">Accept</a>
-                            <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1">Refuse</a>
+                            {% if submission.is_waiting %}
+                                <a href="{% url 'submission_accepted' submission.pk %}" class="btn btn0">Accept</a>
+                                <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1">Refuse</a>
+                            {% elif submission.is_accepted %}
+                                <p class="btn btn0 disabled">Accepted</p>
+                            {% else %}
+                                <p class="btn btn1 disabled">Refused</p>
+                            {% endif %}
                         {% elif conference.can_confirm %}
-                            <a href="{% url 'submission_confirmed' submission.pk %}" class="btn btn0">Confirm</a>
-                            <a href="{% url 'submission_refused' submission.pk %}" class="btn btn1">Refuse</a>
-                        {% elif submission.status == 3 %}
-                            <p class="btn btn0 disabled">Confirmed</p>
-                        {% elif submission.status == 2 %}
-                            <p class="btn btn1 disabled">Refused</p>
+                            {% if submission.is_accepted %}
+                                <a href="{% url 'submission_confirmed' submission.pk %}" class="btn btn0">Confirm</a>
+                            {% elif submission.is_confirmed %}
+                                <p class="btn btn0 disabled">Confirmed</p>
+                            {% else %}
+                                <p class="btn btn1 disabled">Refused</p>
+                            {% endif %}
+                        {% else %}
+                            {% if submission.is_accepted %}
+                                <p class="btn btn0 disabled">Accepted</p>
+                            {% elif submission.is_confirmed %}
+                                <p class="btn btn0 disabled">Confirmed</p>
+                            {% else %}
+                                <p class="btn btn1 disabled">Refused</p>
+                            {% endif %}
                         {% endif %}
                     </td>
                 </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    {% if not conference.can_submit %}
+        <h1 style="color: #ff8000" class="text-center">List of accepted submitters</h1>
+        <table class="table table-bordered"  align="center" id="users"  >
+            <tr>
+                <th>username</th>
+                <th>Article Name</th>
+            </tr>
+            {% for submission in submission_list %}
+                {% if submission.is_accepted or submission.is_confirmed %}
+                    <tr>
+                        <td>{{ submission.user }}</td>
+                        <td>{{ submission.article_name }}</td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </table>
     {% endif %}

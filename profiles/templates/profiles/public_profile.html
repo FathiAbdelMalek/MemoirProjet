@@ -14,7 +14,6 @@
                         <i class="fas fa-user-tie fa-7x mt-5"></i>
                     {% endif %}
                     <h2 class="font-weight-bold mt-4">{{ object.user.username }}</h2>
-                    <a href="{% url 'profile_update' object.user.pk %}" id="hedit"><i class="far fa-edit fa-2x mb-4" id="edit"></i>edit</a>
                 </div>
             </div>
             <div class="col-sm-8 bg- rounded-right" id="myprofi">
@@ -52,7 +51,7 @@
                         <p>{{ object.profile.web_site }}</p>
                     </div>
                 </div>
-                <h3 class="mt-3" id="personal">My Conferences</h3>
+                <h3 class="mt-3" id="personal">{% if object.profile.sexe == 'Male' %}His{% else %}Here{% endif %} Conferences</h3>
                 {% for conference in object.conferences %}
                     <div class="row">
                         <div class="col">
@@ -61,13 +60,9 @@
                         <div class="col">
                             <p>{{ conference.date }}</p>
                         </div>
-                        <div class="col">
-                            <a style="color: #3f3" href="{% url 'conference_update' conference.pk %}">Update</a>
-                            <a style="color: #f33" href="{% url 'conference_delete' conference.pk %}">Delete</a>
-                        </div>
                     </div>
                 {% endfor %}
-                <h3 class="mt-3" id="personal">My Submissions</h3>
+                <h3 class="mt-3" id="personal">{% if object.profile.sexe == 'Male' %}His{% else %}Here{% endif %} Submissions</h3>
                 {% for submission in object.submissions %}
                     <div class="row">
                         <div class="col">
@@ -76,12 +71,6 @@
                         <div class="col">
                             <p>{{ submission.conference.date }}</p>
                         </div>
-                        {% if submission.conference.can_submit %}
-                            <div class="col">
-                                <a style="color: #3f3" href="{% url 'submission_update' submission.pk %}">Update</a>
-                                <a style="color: #f33" href="{% url 'submission_delete' submission.pk %}">Delete</a>
-                            </div>
-                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

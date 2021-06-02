@@ -12,15 +12,16 @@ class Notification(models.Model):
     TYPE = (
         (0, 'New Submission'),
         (1, 'Edited Submission'),
-        (2, 'Accept Demand'),
-        (3, 'Refuse Demand'),
+        (2, 'Accepted Submission'),
+        (3, 'Refused Submission'),
+        (4, 'Confirmed Submission'),
     )
 
     type = models.IntegerField(choices=TYPE)
     seen = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now_add=True)
     conference = models.ForeignKey('conferences.Conference', on_delete=models.CASCADE, related_name='conference')
-    demand = models.ForeignKey('conferences.Submission', on_delete=models.CASCADE, related_name='demand')
+    submission = models.ForeignKey('conferences.Submission', on_delete=models.CASCADE, related_name='demand')
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
 
@@ -31,7 +32,7 @@ def add_submission(instance, created, *args, **kwargs):
     if created:
         notify = Notification(
             type=0,
-            demand=instance,
+            submission=instance,
             conference=instance.conference,
             sender=instance.user,
             receiver=instance.conference.organizer,
@@ -40,7 +41,7 @@ def add_submission(instance, created, *args, **kwargs):
         if instance.status == 0:
             notify = Notification(
                 type=1,
-                demand=instance,
+                submission=instance,
                 conference=instance.conference,
                 sender=instance.user,
                 receiver=instance.conference.organizer
@@ -48,7 +49,7 @@ def add_submission(instance, created, *args, **kwargs):
         elif instance.status == 1:
             notify = Notification(
                 type=2,
-                demand=instance,
+                submission=instance,
                 conference=instance.conference,
                 sender=instance.conference.organizer,
                 receiver=instance.user
@@ -56,7 +57,15 @@ def add_submission(instance, created, *args, **kwargs):
         elif instance.status == 2:
             notify = Notification(
                 type=3,
-                demand=instance,
+                submission=instance,
+                conference=instance.conference,
+                sender=instance.conference.organizer,
+                receiver=instance.user
+            )
+        elif instance.status == 3:
+            notify = Notification(
+                type=4,
+                submission=instance,
                 conference=instance.conference,
                 sender=instance.conference.organizer,
                 receiver=instance.user

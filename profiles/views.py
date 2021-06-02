@@ -11,16 +11,34 @@ from conferences.models import Conference, Submission
 User = get_user_model()
 
 
+@method_decorator(login_required, name='dispatch')
 class ProfileView(generic.DetailView):
     model = Profile
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        context['conferences'] = Conference.objects.filter(organizer=self.request.user)
-        context['submissions'] = Submission.objects.filter(user=self.request.user)
+    def get_object(self, queryset=None):
+        obj = {
+            'user': self.request.user,
+            'profile': Profile.objects.get(user=self.request.user),
+            'conferences': Conference.objects.filter(organizer=self.request.user),
+            'submissions': Submission.objects.filter(user=self.request.user)
+        }
         self.request.session['page'] = self.request.path
-        return context
+        return obj
+
+
+class PublicProfileView(generic.DetailView):
+    model = Profile
+
+    def get_object(self, queryset=None):
+        user = User.objects.get(username=self.kwargs['username'])
+        obj = {
+            'user': user,
+            'profile': Profile.objects.get(user=user),
+            'conferences': Conference.objects.filter(organizer=user),
+            'submissions': Submission.objects.filter(user=user)
+        }
+        self.request.session['page'] = self.request.path
+        return obj
 
 
 @method_decorator(login_required, name='dispatch')
@@ -32,4 +50,4 @@ class ProfileUpdateView(generic.UpdateView):
 
     def form_valid(self, form):
         form.save()
-        return redirect('profile', form.user.pk)
+        return redirect(self.request.session['page'])

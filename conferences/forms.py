@@ -8,11 +8,13 @@ class ConferenceCreationForm(forms.ModelForm):
     submission_deadline = forms.DateField(label='Submission Deadline', widget=forms.SelectDateWidget)
     confirmation_deadline = forms.DateField(label='Confirmation Deadline', widget=forms.SelectDateWidget)
     payment_deadline = forms.DateField(label='Payment Deadline', widget=forms.SelectDateWidget)
+    pre_price = forms.CharField(label='Price before deadline')
+    post_price = forms.CharField(label='Price after deadline')
 
     class Meta:
         model = Conference
         fields = ['title', 'description', 'date', 'submission_deadline', 'confirmation_deadline', 'payment_deadline',
-                  'pre_price', 'place']
+                  'pre_price', 'post_price', 'place']
 
 
 class ConferenceUpdateForm(forms.ModelForm):
@@ -21,11 +23,13 @@ class ConferenceUpdateForm(forms.ModelForm):
     submission_deadline = forms.DateField(label='Submission Deadline', widget=forms.SelectDateWidget)
     confirmation_deadline = forms.DateField(label='Confirmation Deadline', widget=forms.SelectDateWidget)
     payment_deadline = forms.DateField(label='Payment Deadline', widget=forms.SelectDateWidget)
+    pre_price = forms.CharField(label='Price before deadline', widget=forms.TextInput)
+    post_price = forms.CharField(label='Price after deadline', widget=forms.TextInput)
 
     class Meta:
         model = Conference
         fields = ['title', 'description', 'date', 'submission_deadline', 'confirmation_deadline', 'payment_deadline',
-                  'pre_price', 'place']
+                  'pre_price', 'post_price', 'place']
 
 
 class SubmissionCreationForm(forms.ModelForm):

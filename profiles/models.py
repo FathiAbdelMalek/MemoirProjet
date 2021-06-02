@@ -8,26 +8,26 @@ User = get_user_model()
 
 class Profile(models.Model):
     SEXE = (
-        (1, "MALE"),
-        (2, "FEMALE"),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     )
 
     DEGREE = (
-        (0, 'Student'),
-        (1, 'MBB'),
-        (2, 'MBA'),
-        (3, 'MAB'),
-        (4, 'MAA'),
-        (5, 'Professor'),
+        ('Student', 'Student'),
+        ('MBB', 'MBB'),
+        ('MBA', 'MBA'),
+        ('MCB', 'MCB'),
+        ('MCA', 'MCA'),
+        ('Professor', 'Professor'),
     )
 
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.FileField(null=True, blank=True, upload_to='images')
     birth_date = models.DateField(verbose_name="birth date", null=True, blank=True)
-    sexe = models.IntegerField(choices=SEXE, null=True, blank=True)
+    sexe = models.CharField(max_length=6, choices=SEXE, null=True, blank=True)
     country = CountryField(null=True, blank=True)
     work_place = models.CharField(max_length=30, null=True, blank=True)
-    degree = models.IntegerField(choices=DEGREE, null=True, blank=True)
+    degree = models.CharField(max_length=9, choices=DEGREE, null=True, blank=True)
     speciality = models.CharField(max_length=50, null=True, blank=True)
     web_site = models.CharField(max_length=100, null=True, blank=True)
 
