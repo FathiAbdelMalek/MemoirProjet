@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 #container{
     background-color: #2980b9c0;
     width: 80%;
