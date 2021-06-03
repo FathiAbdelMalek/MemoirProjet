@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from conferences.admin import site
 
 urlpatterns = [
-    path('admin/', site.urls),
+    path('authentication/settings/admin/', site.urls),
     path('', include('conferences.urls')),
     path('notifications/', include('notifications.urls')),
     path('accounts/', include('accounts.urls')),
