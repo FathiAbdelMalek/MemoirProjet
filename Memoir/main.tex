@@ -1,18 +1,23 @@
-\documentclass[12pt,a4paper]{article} 
-\author{
-Laarbi Tebessi Tebessa University\\
-Math and Computer Science Departement\\
-Abdelmalek Fathi, Maamar Choukri\\
-Under supervision of Tarek Nouioua}
-\title{Build a web site for representing international conferences and submission on them}
+\documentclass[12pt,a4paper]{article}
 \date{}
 \usepackage[left=12mm, top=1in, bottom=1.5in]{geometry}
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\graphicspath{ {./pics/} }
 \renewcommand*\contentsname{Table of Contents}
+%\def \cls {./cls}
+%\def \pics {./pics}
+%\def \chapters {./chapters}
+%\def \code {./code}
+%\usepackage[language=romanian,type=bachelor]{\cls/standard}
 
 \begin{document}
-%	\includegraphics[width=3cm]{univ-tebessa.jpg}
+	
+	\title{Build a web site for representing international conferences and submission on them}
+	\author{Abdelmalek Fathi\\Maamar Choukri}
+	\pagenumbering{roman}
+%	\advisor{Tarek Nouioua}
+	% %
+	% %
 	\maketitle
 	\clearpage
 	\listoffigures
@@ -20,6 +25,7 @@ Under supervision of Tarek Nouioua}
 	\clearpage
 	\tableofcontents
 	\clearpage
+	\pagenumbering{arabic}
 	
 	\section{Introduction}
 	\paragraph{}
@@ -35,7 +41,7 @@ Under supervision of Tarek Nouioua}
 	\subsection{Hypotheses}
 	\paragraph{}
 	Among the proposed solutions, we find that one of them relies on creating a website for publishing conferences and requesting registration in them, where the person in charge of the conference (university or organization) publishes the necessary information about the conference such as its name, date, and participation price... while any researcher or student can request to participate in it, as he sends his research to the officials in charge of the conference and is waiting for it to be accepted by them.
-	\subsection{Article structure}
+	\subsection{Memory structure}
 	\paragraph{}
 	This article contains the following chapters:
 	\begin{itemize}
@@ -231,6 +237,69 @@ Under supervision of Tarek Nouioua}
 	\subsubsection{For databases}
 	\paragraph{PostgreSQL}
 	PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.\cite{PostgreSQL}
+	\subsection{Interfaces of the site}
+	\subsubsection{Index Page}
+	\paragraph{}
+	In Figure \ref{fig:home-before-login} we see home page of the site for the user who haven't logged in.
+	\begin{figure}[b]
+		\centering
+		\includegraphics[width=\textwidth]{interfaces/before_login.png}
+		\caption{Home page for guests}
+		\label{fig:home-before-login}
+	\end{figure}
+	\paragraph{}
+	In Figure \ref{fig:home-after-login} we see home page of the site for the user who have logged in.
+	\begin{figure}[b]
+		\centering
+		\includegraphics[width=\textwidth]{interfaces/after_login.png}
+		\caption{Home page for registered users}
+		\label{fig:home-after-login}
+	\end{figure}
+	\subsubsection{Conference Details page}
+	\paragraph{}
+	In Figure \ref{fig:details-organizer} we see a conference details page when the logged in user is the organizer of it.
+	\begin{figure}[b]
+		\centering
+		\includegraphics[width=\textwidth]{interfaces/details_organizer.png}
+		\caption{Conference Details page for its organizer}
+		\label{fig:details-organizer}
+	\end{figure}
+	\paragraph{}
+	In Figure \ref{fig:details-non-organizer} we see a conference details page when the logged in user is the organizer of it.
+	\begin{figure}[b]
+		\centering
+		\includegraphics[width=\textwidth]{interfaces/details_organizer.png}
+		\caption{Conference Details page for its organizer}
+		\label{fig:details-non-organizer}
+	\end{figure}
+	\subsubsection{Notifications page}
+	\paragraph{}
+	In Figure \ref{fig:notifications} we see notifications page.
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{interfaces/details_organizer.png}
+		\caption{Noifications page}
+		\label{fig:notifications}
+	\end{figure}
+	\subsubsection{Conference Creation page}
+	\paragraph{}
+	In Figure \ref{fig:new-conf} we see the page of conference creation.
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{interfaces/new_conference.png}
+		\caption{Conference Creation page}
+		\label{fig:new-conf}
+	\end{figure}
+	
+	\subsubsection{Conference Creation page}
+	\paragraph{}
+	In Figure \ref{fig:new-sub} we see the page of submission creation.
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{interfaces/new_submission.png}
+		\caption{Submission Creation page}
+		\label{fig:new-sub}
+	\end{figure}
 	\clearpage
 	\section{Conclusion}
 	
