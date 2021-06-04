@@ -14,7 +14,7 @@ site = ElconferencesAdmin(name='ElconferencesAdmin')
 
 class ConferenceAdmin(admin.ModelAdmin):
     list_display = ('title', 'place', 'date', 'organizer')
-    list_filter = ('place', 'date', 'organizer')
+    list_filter = ('date', 'place', 'organizer')
     fieldsets = (
         ('Title and Description and Place', {
             'fields': ('title', 'description', 'place'),

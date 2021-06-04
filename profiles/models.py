@@ -7,7 +7,7 @@ User = get_user_model()
 
 
 class Profile(models.Model):
-    SEXE = (
+    SEX = (
         ('Male', 'Male'),
         ('Female', 'Female'),
     )
@@ -24,7 +24,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.FileField(null=True, blank=True, upload_to='images')
     birth_date = models.DateField(verbose_name="birth date", null=True, blank=True)
-    sexe = models.CharField(max_length=6, choices=SEXE, null=True, blank=True)
+    sex = models.CharField(max_length=6, choices=SEX, null=True, blank=True)
     country = CountryField(null=True, blank=True)
     work_place = models.CharField(max_length=30, null=True, blank=True)
     degree = models.CharField(max_length=9, choices=DEGREE, null=True, blank=True)

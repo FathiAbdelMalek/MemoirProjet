@@ -2,9 +2,12 @@
 We have utilized the following graphs: class, use cases and sequence diagram of each process in our website.
 
 	\subsection{Class Diagram}
+	\paragraph{}
 	In Figure \ref{fig:class-d} we diagram to introduce classes of the project and their associations with each others.
+	\paragraph{}
+	There is tow types of user (simple user and superuser), only the superuser can access the admin panel like the shown in Figure \ref{fig:home-after-login}, any user can create conference or submit to it, and can accept, confirm of refuse the submissions, when a submission is created or modified (updated, accepted, confirmed, refused) a notification will created and sent to the organizer or the submitter.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/class.png}
 			\caption{class diagram}
@@ -12,9 +15,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsection{Use case Diagram}
+	\paragraph{}
 	In Figure \ref{fig:use-case-d} we diagram to introduce what can every actor do in this project.
+	\paragraph{}
+	there is a guest who can register as new user or login, and a user (simple user) who can create, update, delete conferences and submission, or accept, confirm, refuse others submissions, and there is the superuser who can do everything the user can do additionally to manage the database of the site (manage users and conferences and everything).
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/use_case.png}
 			\caption{use case diagram}
@@ -22,13 +28,19 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsection{Sequence Diagrams}
-	diagrams to figure out how each process is working behind the scene.
+	\paragraph{}
+	Diagrams to figure out how each process is working behind the scene.
+	\paragraph{}
+	Because we have MVC design pattern in Django, all the sequences diagrams will contain a view, controller and a model for the process.
 	
 	
 	\subsubsection{For login}
-	In Figure \ref{fig:login-s-d} we have how the user can login
+	\paragraph{}
+	In Figure \ref{fig:login-s-d} we have how the user can login.
+	\paragraph{}
+	The guest fill login form and submit it, the view send his data to the controller who valid it first, and then verify the database, in case of valid data it will redirect him to profile page, or he return errors messages to the view.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/login_sequence.png}
 			\caption{login sequence diagram}
@@ -36,9 +48,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For register}
-	In Figure \ref{fig:register-s-d} we have how to register as a new user
+	\paragraph{}
+	In Figure \ref{fig:register-s-d} we have how to register as a new user.
+	\paragraph{}
+	The guest fill registration form and submit it, the view send his information to the controller who validate it and verify if exist in database, if valid he will create new user and redirect him to profile page, if not he will return errors messages to the view.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/register_sequence.png}
 			\caption{register sequence diagram}
@@ -46,9 +61,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For create user}
-	In Figure \ref{fig:user-create-s-d} we have how to create new user
+	\paragraph{}
+	In Figure \ref{fig:user-create-s-d} we have how to create new user.
+	\paragraph{}
+	The controller validate the data and verify the database(users model), in case of valid data he will create a new user successfully, or return errors messages to the view.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/user_create_sequence.png}
 			\caption{create user sequence diagram}
@@ -56,9 +74,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For update user}
-	In Figure \ref{fig:user-update-s-d} we have how to update user information
+	\paragraph{}
+	In Figure \ref{fig:user-update-s-d} we have how to update user information.
+	\paragraph{}
+	The controller validate the data and update the user in case of valid data, or return errors messages to the view.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/user_update_sequence.png}
 			\caption{update user sequence diagram}
@@ -66,9 +87,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For delete user}
-	In Figure \ref{fig:user-delete-s-d} we have how to delete a user from the data base
+	\paragraph{}
+	In Figure \ref{fig:user-delete-s-d} we have how to delete a user from the data base.
+	\paragraph{}
+	The controller delete the user directly from the database and refresh the page.
 
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/user_delete_sequence.png}
 			\caption{delete sequence diagram}
@@ -76,9 +100,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For create conference}
-	In Figure \ref{fig:conference-create-s-d} we have how to create new user
+	\paragraph{}
+	In Figure \ref{fig:conference-create-s-d} we have how to create new user.
+	\paragraph{}
+	The controller validate the data of the conference that sent from the user to the view, and verify the database for duplicated data, then he will create new conference (with INSERT query in SQL Language) and redirect the user to the previous page or return errors messages to him.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/conference_create_sequence.png}
 			\caption{create user sequence diagram}
@@ -86,9 +113,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For update conference}
-	In Figure \ref{fig:conference-update-s-d} we have how to update user information
+	\paragraph{}
+	In Figure \ref{fig:conference-update-s-d} we have how to update user information.
+	\paragraph{}
+	The controller validate the data of the conference that sent from the user to the view, and verify the database for duplicated data, then he will update this conference with the new data (with ALTER TABLE query in SQL Language) and redirect the user to the previous page or return errors messages to him.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/conference_update_sequence.png}
 			\caption{update user sequence diagram}
@@ -96,9 +126,12 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For delete conference}
-	In Figure \ref{fig:conference-delete-s-d} we have how to delete a user from the data base
+	\paragraph{}
+	In Figure \ref{fig:conference-delete-s-d} we have how to delete a user from the data base.
+	\paragraph{}
+	Same as user delete process.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/conference_delete_sequence.png}
 			\caption{delete sequence diagram}
@@ -106,9 +139,10 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For create submission}
-	In Figure \ref{fig:submission-create-s-d} we have how to create new user
+	\paragraph{}
+	In Figure \ref{fig:submission-create-s-d} we have how to create new user.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/submission_create_sequence.png}
 			\caption{create user sequence diagram}
@@ -116,9 +150,10 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For update submission}
-	In Figure \ref{fig:submission-update-s-d} we have how to update user information
+	\paragraph{}
+	In Figure \ref{fig:submission-update-s-d} we have how to update user information.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/submission_update_sequence.png}
 			\caption{update user sequence diagram}
@@ -126,9 +161,10 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 		\end{figure}
 	
 	\subsubsection{For delete submission}
-	In Figure \ref{fig:submission-delete-s-d} we have how to delete a user from the data base
+	\paragraph{}
+	In Figure \ref{fig:submission-delete-s-d} we have how to delete a user from the data base.
 	
-		\begin{figure}[b]
+		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\textwidth]{diagrams/submission_delete_sequence.png}
 			\caption{delete sequence diagram}

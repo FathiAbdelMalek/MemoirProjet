@@ -5,8 +5,8 @@ from . import models
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'sexe', 'country', 'work_place', 'degree', 'speciality')
-    list_filter = ('sexe', 'degree', 'speciality', 'country')
+    list_display = ('user', 'sex', 'country', 'work_place', 'degree', 'speciality')
+    list_filter = ('sex', 'degree', 'speciality', 'country')
 
 
 site.register(models.Profile, ProfileAdmin)

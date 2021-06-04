@@ -2,31 +2,31 @@
 \usepackage[left=12mm, top=0.8in, bottom=0.8in]{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\graphicspath{ {./pics/} }
+\usepackage[utf8]{inputenc}
+\graphicspath{ {pics/} }
 \renewcommand*\contentsname{Table of Contents}
 
 \begin{document}
 	
-	\input{./includes/title.tex}
-	\newpage
+	\input{includes/title.tex}
+	\clearpage
 	\pagenumbering{roman}
 	\tableofcontents
-	\newpage
+	\clearpage
 	\listoffigures
-	\newpage
-	\listoftables
-	\newpage
+	\clearpage
 	\pagenumbering{arabic}
-	\input{./includes/chapters/c1.tex}
-	\newpage
-	\input{./includes/chapters/c2.tex}
-	\newpage
-	\input{./includes/chapters/c3.tex}
-	\newpage
-	\input{./includes/chapters/c4.tex}
-	\newpage
-	\input{./includes/chapters/c5.tex}
-	\newpage
-	\input{./includes/bib.tex}
+	\input{includes/chapters/c1.tex}
+	\clearpage
+	\input{includes/chapters/c2.tex}
+	\clearpage
+	\input{includes/chapters/c3.tex}
+	\clearpage
+	\input{includes/chapters/c4.tex}
+	\clearpage
+	\input{includes/chapters/c5.tex}
+	\clearpage
+	\input{includes/bib.tex}
+	\clearpage
 	
 \end{document}
