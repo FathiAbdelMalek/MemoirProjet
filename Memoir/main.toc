@@ -7,12 +7,12 @@
 \contentsline {subsection}{\numberline {1.3}Memory structure}{1}{subsection.1.3}%
 \contentsline {paragraph}{}{1}{section*.7}%
 \contentsline {section}{\numberline {2}Presentation of the project frameworks}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}What}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}What ?}{2}{subsection.2.1}%
 \contentsline {paragraph}{}{2}{section*.8}%
 \contentsline {subsection}{\numberline {2.2}Why ?}{2}{subsection.2.2}%
 \contentsline {paragraph}{}{2}{section*.9}%
-\contentsline {paragraph}{}{2}{section*.10}%
 \contentsline {subsection}{\numberline {2.3}How ?}{2}{subsection.2.3}%
+\contentsline {paragraph}{}{2}{section*.10}%
 \contentsline {paragraph}{}{2}{section*.11}%
 \contentsline {section}{\numberline {3}Analysis and design (UML)}{3}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Class Diagram}{3}{subsection.3.1}%
