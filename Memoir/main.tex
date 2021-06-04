@@ -1,8 +1,9 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[16pt,a4paper]{article}
+\linespread{1.6}
 \usepackage[left=12mm, top=0.8in, bottom=0.8in]{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage[utf8]{inputenc}
+\usepackage{inputenc}
 \graphicspath{ {pics/} }
 \renewcommand*\contentsname{Table of Contents}
 
@@ -12,11 +13,10 @@
 	\clearpage
 	\pagenumbering{roman}
 	\tableofcontents
-	\clearpage
 	\listoffigures
 	\clearpage
-	\pagenumbering{arabic}
-	\input{includes/chapters/c1.tex}
+    \pagenumbering{arabic}
+    \input{includes/chapters/c1.tex}
 	\clearpage
 	\input{includes/chapters/c2.tex}
 	\clearpage

@@ -1,11 +1,15 @@
 \section{Analysis and design (UML)}
-We have utilized the following graphs: class, use cases and sequence diagram of each process in our website.
+We have utilized the following diagrams: class, use cases and sequence diagram of each process in our website.
 
 	\subsection{Class Diagram}
 	\paragraph{}
 	In Figure \ref{fig:class-d} we diagram to introduce classes of the project and their associations with each others.
 	\paragraph{}
-	There is tow types of user (simple user and superuser), only the superuser can access the admin panel like the shown in Figure \ref{fig:home-after-login}, any user can create conference or submit to it, and can accept, confirm of refuse the submissions, when a submission is created or modified (updated, accepted, confirmed, refused) a notification will created and sent to the organizer or the submitter.
+	There is tow types of users (simple user and super user), only the superuser can access the admin panel like the shown in Figure \ref{fig:home-after-login}.
+	\paragraph{}
+	Any user can create conference or submit to it, and can accept, confirm or refuse the other submissions, when a submission is created or modified (updated, accepted, confirmed, refused) a notification will created and sent to the organizer or the submitter, when it deleted, the notification deleted too.
+	\paragraph{}
+	The user is complicated from user class, profile class, and superuser class, the user class contain important data like username, email, password... etc, and the profile class is for the other data like (birth date, work place, degree... etc), the superuser class is for the operations of the super user
 	
 		\begin{figure}[!ht]
 			\centering
@@ -18,7 +22,9 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 	\paragraph{}
 	In Figure \ref{fig:use-case-d} we diagram to introduce what can every actor do in this project.
 	\paragraph{}
-	there is a guest who can register as new user or login, and a user (simple user) who can create, update, delete conferences and submission, or accept, confirm, refuse others submissions, and there is the superuser who can do everything the user can do additionally to manage the database of the site (manage users and conferences and everything).
+	There is a guest who can register or login, and a user who can create, update, delete conferences and submission, or accept, confirm, refuse others submissions, and he can manage his profile (update country, degree, specialty... etc).
+	\paragraph{}
+	The superuser is who can do everything the user can do additionally to manage the database of the site.
 	
 		\begin{figure}[!ht]
 			\centering
@@ -31,14 +37,14 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 	\paragraph{}
 	Diagrams to figure out how each process is working behind the scene.
 	\paragraph{}
-	Because we have MVC design pattern in Django, all the sequences diagrams will contain a view, controller and a model for the process.
+	Because we have MVC design pattern in Django, all the sequence diagrams will contain a view, controller and a model for the process, when the view is the template of HTML that the user see, the controller is the back-end code to control the view and the model (the connection with the database).
 	
 	
 	\subsubsection{For login}
 	\paragraph{}
 	In Figure \ref{fig:login-s-d} we have how the user can login.
 	\paragraph{}
-	The guest fill login form and submit it, the view send his data to the controller who valid it first, and then verify the database, in case of valid data it will redirect him to profile page, or he return errors messages to the view.
+	The controller validate the data, in case of valid data he will redirected to profile page, or see errors.
 	
 		\begin{figure}[!ht]
 			\centering
@@ -51,7 +57,7 @@ We have utilized the following graphs: class, use cases and sequence diagram of 
 	\paragraph{}
 	In Figure \ref{fig:register-s-d} we have how to register as a new user.
 	\paragraph{}
-	The guest fill registration form and submit it, the view send his information to the controller who validate it and verify if exist in database, if valid he will create new user and redirect him to profile page, if not he will return errors messages to the view.
+	The controller validate the data and verify if exist in database, if valid he will create new user and redirect him to profile page, if not the user will see errors messages.
 	
 		\begin{figure}[!ht]
 			\centering
